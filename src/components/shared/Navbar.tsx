@@ -1,9 +1,9 @@
 import {
-  ChevronDown,
-  LockKeyhole,
+  Dot,
+  HousePlus,
+  LogIn,
   LogOut,
-  Menu,
-  Settings,
+  MenuIcon,
   User,
 } from "lucide-react";
 import {
@@ -11,14 +11,26 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import Logo from "./Logo";
+import { useUserContext } from "@/context/AuthContext";
+import { useEffect } from "react";
+import { useLogoutUuser } from "@/lib/react-query/queries";
 
 export default function Navbar() {
+  const { user, isLoading: isUserLoadng } = useUserContext();
+  const navigate = useNavigate();
+  const { mutate: logout, isSuccess } = useLogoutUuser();
+
+  useEffect(() => {
+    if (isSuccess) navigate(0);
+  }, [navigate, isSuccess]);
+
   return (
     <div className="flex items-center justify-between container padX h-20 border-b">
       <Logo />
@@ -37,43 +49,85 @@ export default function Navbar() {
         </li>
       </ul>
       <div className="flex items-center gap-x-2">
-        <Menu size={28} className="lg:hidden" />
-        {/* <Link href='/login'>
-          <Button variant='outline'>Log in</Button>
-        </Link> */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              className="flex items-center justify-between">
-              <span className="pr-2">Hi, Joseph</span> <ChevronDown size={13} />
-            </Button>
+            <div className="flex items-center gap-x-2 rounded-full px-3 py-1 border hover:shadow cursor-pointer">
+              <MenuIcon />
+              <img
+                src={user.imageUrl || "/public/images/user-placeholder.png"}
+                alt=""
+                className="rounded-full w-8 h-8"
+              />
+            </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-30">
+          <DropdownMenuContent className="w-40">
+            {!user.id && (
+              <>
+                <Link to="/login">
+                  <DropdownMenuItem className="text-primary bg-primary bg-opacity-10">
+                    <LogIn className="mr-2 h-4 w-4" />
+                    <span>Log in</span>
+                  </DropdownMenuItem>
+                </Link>
+                <DropdownMenuSeparator />
+              </>
+            )}
+            <DropdownMenuLabel>Navigation</DropdownMenuLabel>
+            <DropdownMenuGroup>
+              <Link to="/">
+                <DropdownMenuItem>
+                  <Dot className="mr-2 h-4 w-4" />
+                  <span>Home</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link to="/about">
+                <DropdownMenuItem>
+                  <Dot className="mr-2 h-4 w-4" />
+                  <span>About</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link to="/services">
+                <DropdownMenuItem>
+                  <Dot className="mr-2 h-4 w-4" />
+                  <span>Services</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link to="/explore">
+                <DropdownMenuItem>
+                  <Dot className="mr-2 h-4 w-4" />
+                  <span>Explore</span>
+                </DropdownMenuItem>
+              </Link>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <User className="mr-2 h-4 w-4" />
                 <span>Account</span>
               </DropdownMenuItem>
-              <Link to="/admin/listings">
+              <Link to="/create">
                 <DropdownMenuItem>
-                  <LockKeyhole className="mr-2 h-4 w-4" />
-                  <span>Admin</span>
+                  <HousePlus className="mr-2 h-4 w-4" />
+                  <span>Create</span>
                 </DropdownMenuItem>
               </Link>
-              <DropdownMenuItem>
-                <Settings className="mr-2 h-4 w-4" />
-                <span>Settings</span>
-              </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut className="mr-2 h-4 w-4" />
-              <span>Log out</span>
-            </DropdownMenuItem>
+            {user.id && (
+              <DropdownMenuItem
+                onClick={() => logout()}
+                className="text-red-500 bg-red-100">
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Log out</span>
+              </DropdownMenuItem>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button className="max-sm:hidden">Contact us</Button>
+        {!user.id && !isUserLoadng && (
+          <Link to="/login">
+            <Button className="max-sm:hidden">Login</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

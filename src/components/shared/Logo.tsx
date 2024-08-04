@@ -1,19 +1,21 @@
+import { Link } from "react-router-dom";
+
 export default function Logo({ bg }: { bg?: React.ReactNode }) {
   return (
-    <div className="h-fit">
+    <Link to="/" className="h-fit">
       {bg ? (
         <img
           src="/public/images/logo-white.png"
           alt=""
-          className="w-[150px] object-cover"
+          className="w-[150px] max-md:w-[120px] max-sm:w-[100px] object-cover"
         />
       ) : (
         <img
           src="/public/images/logo.png"
           alt=""
-          className="w-[120px] object-cover"
+          className="w-[120px] max-md:w-[120px] max-sm:w-[100px] object-cover"
         />
       )}
-    </div>
+    </Link>
   );
 }

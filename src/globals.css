@@ -95,7 +95,7 @@
     @apply text-3xl max-sm:text-2xl font-geist600;
   }
   h4 {
-    @apply text-2xl font-geist500 leading-7;
+    @apply text-2xl font-geist600 leading-7;
   }
 }
 
@@ -105,5 +105,8 @@
   }
   .padY {
     @apply py-14;
+  }
+  .shadcn-toast_success {
+    @apply bg-primary text-white;
   }
 }

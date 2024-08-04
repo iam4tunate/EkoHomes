@@ -11,7 +11,7 @@ export default function PropertyCard() {
           alt="property"
           className="rounded-lg w-full"
         />
-        <div className="pt-4 font-medium">Seaside Serenity Villa</div>
+        <div className="pt-4 font-geist500">Seaside Serenity Villa</div>
         <p className="text-sm leading-tight pt-2 pb-3">
           A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban
           neighborhood...

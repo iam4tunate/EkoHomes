@@ -15,7 +15,7 @@ import { House, MapPin, Proportions, Search, Send, Wallet } from "lucide-react";
 
 export default function Explore() {
   return (
-    <main className="py-14">
+    <div className="py-14">
       <div className="bg-accent pb-14">
         <div className="container padX">
           <form action="" className="-translate-y-8 -mb-8 padX">
@@ -216,6 +216,6 @@ export default function Explore() {
           </form>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

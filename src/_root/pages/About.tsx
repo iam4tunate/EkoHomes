@@ -5,7 +5,7 @@ import CTA from "@/components/shared/CTA";
 
 export default function About() {
   return (
-    <main>
+    <div>
       <div className="max-lg:padX grid grid-cols-2 max-lg:grid-cols-1 items-center justify-between">
         <div className="lg:padX py-12 lg:max-w-2xl ml-auto  max-lg:w-full max-lg:ml-">
           <img
@@ -155,6 +155,6 @@ export default function About() {
       </div>
 
       <CTA />
-    </main>
+    </div>
   );
 }

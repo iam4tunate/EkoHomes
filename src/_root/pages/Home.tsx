@@ -13,7 +13,7 @@ import CTA from "@/components/shared/CTA";
 
 export default function Home() {
   return (
-    <main className="">
+    <div>
       <div className="">
         <div className="padX pt-16 flex flex-col items-center">
           <div className="text-center w-[50%] max-lg:w-[70%] max-sm:w-full pb-12">
@@ -200,6 +200,6 @@ export default function Home() {
       </div>
 
       <CTA />
-    </main>
+    </div>
   );
 }
