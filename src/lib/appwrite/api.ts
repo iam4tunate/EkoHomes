@@ -27,7 +27,7 @@ export async function createUser(user: INewUser) {
     });
     return newUser;
   } catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof Error && "code" in error) {
       if (error.code === 409) {
         return toast({
           variant: "destructive",
@@ -56,7 +56,7 @@ export async function saveUserToDB(user: {
   first_name: string;
   last_name: string;
   email: string;
-  phone_number: number;
+  phone_number: string;
   imageUrl: URL;
 }) {
   try {
@@ -80,7 +80,7 @@ export async function loginUser(user: { email: string; password: string }) {
     );
     return session;
   } catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof Error && "code" in error) {
       if (error.code === 401) {
         return toast({
           variant: "destructive",
@@ -101,7 +101,6 @@ export async function loginUser(user: { email: string; password: string }) {
       console.log("hi", error.code);
       console.log("hi", error.message);
     }
-    console.log(error);
   }
 }
 
