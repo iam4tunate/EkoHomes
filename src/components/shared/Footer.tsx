@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import Logo from "./Logo";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -7,16 +9,16 @@ import {
   TwitterIcon,
   YoutubeIcon,
 } from "lucide-react";
-import { Link } from "react-router-dom";
-import Logo from "./Logo";
 
 export default function Footer() {
   return (
     <footer className="bg-primary pt-12 pb-8">
       <div className="container padX text-white text-opacity-90">
         <div className="grid grid-cols-[2fr_1fr_2fr_1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 gap-y-12 max-lg:gap-x-24 gap-x-16 mb-12">
-          <div className="">
-            <Logo bg />
+          <div>
+            <div className="w-fit">
+              <Logo bg />
+            </div>
             <p className="text-sm w-full pt-4">
               At KOA, we don&apos;t just sell properties; we create homes,
               curate communities, and build dreams.
@@ -34,7 +36,7 @@ export default function Footer() {
               <Link to="/services" className="underline w-fit">
                 Services
               </Link>
-              <Link to="/landmarks" className="underline w-fit">
+              <Link to="/explore" className="underline w-fit">
                 Explore
               </Link>
               <Link to="/contact" className="underline w-fit">

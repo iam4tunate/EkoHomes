@@ -11,7 +11,10 @@ export default function SectionHeading({
   paragraph: string;
 }) {
   return (
-    <div className="w-[50%] max-lg:w-[70%] max-sm:w-full pb-8 max-sm:pb-4">
+    <div
+      className={`${
+        icon === "white" && "text-white"
+      } w-[50%] max-lg:w-[70%] max-sm:w-full pb-8 max-sm:pb-4`}>
       <img
         src={icon === "white" ? starsWhite : starsGreen}
         alt="stars"

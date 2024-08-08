@@ -43,7 +43,6 @@ export default function AuthProvider({
 
   const navigate = useNavigate();
 
-  //! checking if there's an authenticated users everytime the page reloads
   const checkAuthUser = async () => {
     setIsLoading(true);
     try {
@@ -62,7 +61,6 @@ export default function AuthProvider({
       }
       return false;
     } catch (error) {
-      console.log(error);
       return false;
     } finally {
       setIsLoading(false);
@@ -70,11 +68,6 @@ export default function AuthProvider({
   };
 
   useEffect(() => {
-    // if (
-    //   localStorage.getItem("cookieFallback") === "[]" ||
-    //   localStorage.getItem("cookieFallback") === null
-    // )
-    //   navigate("/login");
     checkAuthUser();
   }, [navigate]);
 

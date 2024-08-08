@@ -1,7 +1,5 @@
+import { Cta, SectionHeading } from "@/components/shared";
 import { GraduationCap, Handshake, Star, Users } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import SectionHeading from "@/components/shared/SectionHeading";
-import CTA from "@/components/shared/CTA";
 
 export default function About() {
   return (
@@ -39,7 +37,7 @@ export default function About() {
         <div className="max-lg:hidden">
           <img
             src="/public/images/houseOnHand.svg"
-            alt="houseon hand"
+            alt="house on hand"
             className="w-full object-cover ml-auto"
           />
         </div>
@@ -47,7 +45,7 @@ export default function About() {
 
       <div className="bg-primary text-white text-opacity-90">
         <div className="container padX py-14 grid grid-cols-[40%_55%] max-lg:grid-cols-1 justify-between gap-x-12">
-          <div className="max-lg:pb-8 max-sm:pb-4">
+          <div className="max-lg:pb-8 max-sm:pb-4 max-lg:w-[70%] max-sm:w-full">
             <img
               src="/public/images/stars-white.svg"
               alt=""
@@ -122,39 +120,33 @@ export default function About() {
             platform that transcended the ordinary."
         />
         <div className="grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-x-6 gap-y-6">
-          <Card className="bg-transparent border border-primary h-fit">
-            <CardContent className="py-8 px-4">
-              <h4 className="font-medium">3+ Years of Excellence</h4>
-              <p className="text-sm leading-tight pt-2 pb-3">
-                Our experience with KOA was outstanding. Their team&apos;s
-                dedication and professionalism made finding our dream home a
-                breeze. Highly recommended!
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="bg-transparent border border-primary">
-            <CardContent className="py-8 px-4">
-              <h4 className="font-medium">Happy Clients</h4>
-              <p className="text-sm leading-tight pt-2 pb-3">
-                Our greatest achievement is the satisfaction of our clients.
-                Their success stories fuel our passion for what we do.
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="bg-transparent border border-primary">
-            <CardContent className="py-8 px-4">
-              <h4 className="font-medium">Industry Recognition</h4>
-              <p className="text-sm leading-tight pt-2 pb-3">
-                We&apos;ve earned the respect of our peers and industry leaders,
-                with accolades and awards that reflect our commitment to
-                excellence.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="border border-primary py-8 px-4 rounded-lg">
+            <h4 className="font-medium">3+ Years of Excellence</h4>
+            <p className="text-sm leading-tight pt-2 pb-3">
+              Our experience with KOA was outstanding. Their team&apos;s
+              dedication and professionalism made finding our dream home a
+              breeze. Highly recommended!
+            </p>
+          </div>
+          <div className="border border-primary py-8 px-4 rounded-lg">
+            <h4 className="font-medium">Happy Clients</h4>
+            <p className="text-sm leading-tight pt-2 pb-3">
+              Our greatest achievement is the satisfaction of our clients. Their
+              success stories fuel our passion for what we do.
+            </p>
+          </div>
+          <div className="border border-primary py-8 px-4 rounded-lg">
+            <h4 className="font-medium">Industry Recognition</h4>
+            <p className="text-sm leading-tight pt-2 pb-3">
+              We&apos;ve earned the respect of our peers and industry leaders,
+              with accolades and awards that reflect our commitment to
+              excellence.
+            </p>
+          </div>
         </div>
       </div>
 
-      <CTA />
+      <Cta />
     </div>
   );
 }

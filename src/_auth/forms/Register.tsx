@@ -37,16 +37,12 @@ export default function Register() {
   });
 
   async function onSubmit(values: z.infer<typeof registerValidation>) {
-    const newUser = await createUser(values);
-    console.log(newUser);
-    if (!newUser) throw Error;
+    await createUser(values);
 
-    const session = await loginUser({
+    await loginUser({
       email: values.email,
       password: values.password,
     });
-
-    if (!session) throw Error;
 
     const isLoggedIn = await checkAuthUser();
     if (isLoggedIn) {

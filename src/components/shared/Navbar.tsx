@@ -17,10 +17,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import Logo from "./Logo";
 import { useUserContext } from "@/context/AuthContext";
 import { useEffect } from "react";
 import { useLogoutUuser } from "@/lib/react-query/queries";
+import Logo from "./Logo";
 
 export default function Navbar() {
   const { user, isLoading: isUserLoadng } = useUserContext();

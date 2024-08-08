@@ -86,13 +86,13 @@
   }
 
   * {
-    @apply border-border;
+    @apply border-border scroll-smooth;
   }
   body {
-    @apply bg-[#fffcfc] font-geist400 text-[#0c0d0f];
+    @apply bg-[#fffcfc] font-geist400 text-[#0c0d0f] tracking-normal;
   }
   h3 {
-    @apply text-3xl max-sm:text-2xl font-geist600;
+    @apply text-3xl max-md:text-2xl font-geist600;
   }
   h4 {
     @apply text-2xl font-geist600 leading-7;
@@ -108,5 +108,16 @@
   }
   .shadcn-toast_success {
     @apply bg-primary text-white;
+  }
+
+  /* Custom class to remove number input arrows */
+  .no-arrow::-webkit-outer-spin-button,
+  .no-arrow::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .no-arrow {
+    -moz-appearance: textfield; /* Firefox */
   }
 }

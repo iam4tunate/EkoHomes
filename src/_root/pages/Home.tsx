@@ -1,15 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { MoveRight } from "lucide-react";
-import PropertySlider from "@/components/shared/PropertySlider";
-import TestimonySlider from "@/components/shared/TestimonySlider";
+import { SwiperSlide } from "swiper/react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@radix-ui/react-accordion";
-import SectionHeading from "@/components/shared/SectionHeading";
-import CTA from "@/components/shared/CTA";
+import { Cta, HomeCard, Slider } from "@/components/shared";
 
 export default function Home() {
   return (
@@ -123,32 +121,118 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="container padX padY">
-        <div className="-mb-6 max-sm:-mb-0">
-          <SectionHeading
-            icon="green"
-            title="Featured Properties"
-            paragraph="Each listing offers a glimpse into exceptional homes and
-              investments available through KOA properties."
-          />
-        </div>
-        <PropertySlider />
-      </div>
+      <Slider
+        title="Featured Properties"
+        text="Each listing offers a glimpse into exceptional homes and investments available through KOA properties."
+        background="white">
+        <SwiperSlide>
+          <HomeCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <HomeCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <HomeCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <HomeCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <HomeCard />
+        </SwiperSlide>
+      </Slider>
 
-      <div className="bg-primary text-white">
-        <div className="container padX padY">
-          <div className="-mb-6 max-sm:-mb-0">
-            <SectionHeading
-              icon="white"
-              title="What Our Client Say"
-              paragraph="Read the success stories and heartfelt testimonials from our valued
+      <Slider
+        title="What Our Client Say"
+        text="Read the success stories and heartfelt testimonials from our valued
             clients. Discover why they chose Estatein for their real estate
             needs."
-            />
+        background="green">
+        <SwiperSlide>
+          <div className="pt-8 bg-gray-100 text-foreground px-4 py-4 rounded-lg">
+            <div className=" text-lg font-geist600">Exceptional Service!</div>
+            <p className="text-sm leading-tight pt-2 pb-3">
+              Our experience with KOA was outstanding. Their team&apos;s
+              dedication and professionalism made finding our dream home a
+              breeze. Highly recommended!
+            </p>
+            <div className="flex items-center pt-4">
+              <img
+                src="/public/images/passport.jpg"
+                alt="avatar"
+                className="w-10 h-10 object-cover object-top rounded-full"
+              />
+              <div className="text-sm pl-3">
+                <p className="font-geist500">Wande Jamiu</p>
+                <p className="text-xs">Lagos, Nigeria</p>
+              </div>
+            </div>
           </div>
-          <TestimonySlider />
-        </div>
-      </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="pt-8 bg-gray-100 text-foreground px-4 py-4 rounded-lg">
+            <div className=" text-lg font-geist600">Exceptional Service!</div>
+            <p className="text-sm leading-tight pt-2 pb-3">
+              Our experience with KOA was outstanding. Their team&apos;s
+              dedication and professionalism made finding our dream home a
+              breeze. Highly recommended!
+            </p>
+            <div className="flex items-center pt-4">
+              <img
+                src="/public/images/passport.jpg"
+                alt="avatar"
+                className="w-10 h-10 object-cover object-top rounded-full"
+              />
+              <div className="text-sm pl-3">
+                <p className="font-geist500">Wande Jamiu</p>
+                <p className="text-xs">Lagos, Nigeria</p>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="pt-8 bg-gray-100 text-foreground px-4 py-4 rounded-lg">
+            <div className=" text-lg font-geist600">Exceptional Service!</div>
+            <p className="text-sm leading-tight pt-2 pb-3">
+              Our experience with KOA was outstanding. Their team&apos;s
+              dedication and professionalism made finding our dream home a
+              breeze. Highly recommended!
+            </p>
+            <div className="flex items-center pt-4">
+              <img
+                src="/public/images/passport.jpg"
+                alt="avatar"
+                className="w-10 h-10 object-cover object-top rounded-full"
+              />
+              <div className="text-sm pl-3">
+                <p className="font-geist500">Wande Jamiu</p>
+                <p className="text-xs">Lagos, Nigeria</p>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="pt-8 bg-gray-100 text-foreground px-4 py-4 rounded-lg">
+            <div className=" text-lg font-geist600">Exceptional Service!</div>
+            <p className="text-sm leading-tight pt-2 pb-3">
+              Our experience with KOA was outstanding. Their team&apos;s
+              dedication and professionalism made finding our dream home a
+              breeze. Highly recommended!
+            </p>
+            <div className="flex items-center pt-4">
+              <img
+                src="/public/images/passport.jpg"
+                alt="avatar"
+                className="w-10 h-10 object-cover object-top rounded-full"
+              />
+              <div className="text-sm pl-3">
+                <p className="font-geist500">Wande Jamiu</p>
+                <p className="text-xs">Lagos, Nigeria</p>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+      </Slider>
 
       <div className="padX padY container grid grid-cols-2 max-lg:grid-cols-1">
         <div className="w-[80%] max-sm:w-full max-lg:pb-8 max-sm:pb-4">
@@ -199,7 +283,7 @@ export default function Home() {
         </div>
       </div>
 
-      <CTA />
+      <Cta />
     </div>
   );
 }

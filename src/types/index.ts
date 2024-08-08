@@ -13,13 +13,20 @@
 //   file: File[];
 // };
 
-// export type INewPost = {
-//   userId: string;
-//   caption: string;
-//   file: File[];
-//   location?: string;
-//   tags?: string;
-// };
+export type INewHome = {
+  userId: string;
+  title: string;
+  price: string;
+  address: string;
+  no_of_bathrooms: string;
+  no_of_bedrooms: string;
+  year_built: string;
+  sqm: string;
+  payment_method: string;
+  description: string;
+  features: string;
+  files: File[];
+};
 
 // export type IUpdatePost = {
 //   postId: string;

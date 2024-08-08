@@ -1,4 +1,4 @@
-import SectionHeading from "@/components/shared/SectionHeading";
+import { SectionHeading } from "@/components/shared";
 
 type ServiceProps = {
   right?: boolean;

@@ -1,5 +1,3 @@
-import PropertyCard from "@/components/shared/PropertyCard";
-import SectionHeading from "@/components/shared/SectionHeading";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -12,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { House, MapPin, Proportions, Search, Send, Wallet } from "lucide-react";
+import { HomeCard, SectionHeading } from "@/components/shared";
 
 export default function Explore() {
   return (
@@ -87,12 +86,12 @@ export default function Explore() {
             </div>
           </form>
           <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-x-6 gap-y-8 pt-12">
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
+            <HomeCard />
+            <HomeCard />
+            <HomeCard />
+            <HomeCard />
+            <HomeCard />
+            <HomeCard />
           </div>
         </div>
       </div>

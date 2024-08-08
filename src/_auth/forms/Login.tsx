@@ -32,12 +32,10 @@ export default function Login() {
   });
 
   async function onSubmit(values: z.infer<typeof LoginValidation>) {
-    const session = await loginUser({
+    await loginUser({
       email: values.email,
       password: values.password,
     });
-
-    if (!session) throw Error;
 
     const isLoggedIn = await checkAuthUser();
     if (isLoggedIn) {
