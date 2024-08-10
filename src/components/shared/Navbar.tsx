@@ -1,4 +1,5 @@
 import {
+  BookMarked,
   Dot,
   HousePlus,
   LogIn,
@@ -23,8 +24,8 @@ import { useLogoutUuser } from "@/lib/react-query/queries";
 import Logo from "./Logo";
 
 export default function Navbar() {
-  const { user, isLoading: isUserLoadng } = useUserContext();
   const navigate = useNavigate();
+  const { user, isLoading: isUserLoadng } = useUserContext();
   const { mutate: logout, isSuccess } = useLogoutUuser();
 
   useEffect(() => {
@@ -109,6 +110,12 @@ export default function Navbar() {
                 <DropdownMenuItem>
                   <HousePlus className="mr-2 h-4 w-4" />
                   <span>Create</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link to="/create">
+                <DropdownMenuItem>
+                  <BookMarked className="mr-2 h-4 w-4" />
+                  <span>Saved</span>
                 </DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>

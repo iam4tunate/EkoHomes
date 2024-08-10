@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 
 type FileUploaderProps = {
   fieldChange: (files: File[]) => void;
-  mediaUrl: string;
+  mediaUrl: string[];
 };
 
 export default function FileUploader({
@@ -13,12 +13,11 @@ export default function FileUploader({
 }: FileUploaderProps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [files, setFiles] = useState<File[]>([]);
-  const [fileUrls, setFileUrls] = useState<string[]>(
-    mediaUrl ? [mediaUrl] : []
-  );
+  const [fileUrls, setFileUrls] = useState<string[]>(mediaUrl ? mediaUrl : []);
 
   const onDrop = useCallback(
     (acceptedFiles: FileWithPath[]) => {
+      setFileUrls(() => []);
       setFiles(acceptedFiles);
       fieldChange(acceptedFiles);
 
@@ -50,8 +49,8 @@ export default function FileUploader({
               <img src={url} alt="image" className="w-24" />
             ))}
           </div>
-          <p className="pt-2 text-center">
-            Click or drag & drop photo to replace
+          <p className="pt-2 text-center text-sm font-geist500">
+            Click or drag & drop photo to replace.
           </p>
         </>
       ) : (
@@ -62,9 +61,7 @@ export default function FileUploader({
             height={77}
             alt="file-upload"
           />
-          <h4 className="mb-2 mt-6">
-            Drag & drop photo here
-          </h4>
+          <h4 className="mb-2 mt-6">Drag & drop photo here</h4>
           <p className="mb-6">SVG, PNG, JPG</p>
           <Button className="bg-primary">Select from computer</Button>
         </div>

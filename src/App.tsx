@@ -13,6 +13,7 @@ import {
   Services,
   UpdateHome,
 } from "./_root/pages";
+import PrivateRoutes from "./lib/PrivateRoutes";
 
 export default function App() {
   return (
@@ -21,12 +22,14 @@ export default function App() {
         <Routes>
           <Route element={<RootLayout />}>
             {/* private routes  */}
+            <Route element={<PrivateRoutes />}>
+              <Route path="/create" element={<CreateHome />} />
+              <Route path="/update/:id" element={<UpdateHome />} />
+            </Route>
 
             {/* public routes  */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/create" element={<CreateHome />} />
-            <Route path="/update" element={<UpdateHome />} />
             <Route path="/" element={<Home />} />
             <Route path="/home/:id" element={<HomeDetails />} />
             <Route path="/about" element={<About />} />

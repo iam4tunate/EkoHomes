@@ -18,17 +18,22 @@ export const LoginValidation = z.object({
 
 export const HomeValidation = z.object({
   title: z.string().min(5),
-  price: z.string(),
-  address: z.string().min(5).max(150, { message: "maximum of 150 characters" }),
-  no_of_bathrooms: z.string(),
-  no_of_bedrooms: z.string(),
-  year_built: z.string(),
-  sqm: z.string(),
+  // price: z.number().nonnegative("only positive value allowed"),
+  price: z.number(),
+  year_built: z.number(),
   payment_method: z.string(),
+  bathrooms: z.number(),
+  bedrooms: z.number(),
+  toilets: z.number(),
+  address: z.string().min(5).max(150, { message: "maximum of 150 characters" }),
+  state: z.string(),
+  lga: z.string(),
   description: z
     .string()
     .min(5)
     .max(1000, { message: "maximum of 1000 characters" }),
-  features: z.string(),
+  features: z.string().nonempty("Features are required"),
   files: z.custom<File[]>(),
+  //!issue with this is that you have to upload a new file when you want to upload
+  // files: z.array(z.instanceof(File)).min(1, "At least one file is required"),
 });

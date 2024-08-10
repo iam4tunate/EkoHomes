@@ -1,5 +1,6 @@
 import { useUserContext } from "@/context/AuthContext";
-import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 type AuthLayoutProps = {
   img: string;
@@ -7,10 +8,16 @@ type AuthLayoutProps = {
 };
 
 export default function AuthLayout({ img, children }: AuthLayoutProps) {
+  const navigate = useNavigate();
   const { isAuthenticated } = useUserContext();
-  return isAuthenticated ? (
-    <Navigate to="/" />
-  ) : (
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
+
+  return (
     <div className="grid grid-cols-2 max-lg:grid-cols-1 items-center max-md:items-start min-h-[calc(100vh-80px)] max-md:max-h-fit">
       {children}
       <div className="self-stretch relative max-lg:hidden">

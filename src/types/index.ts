@@ -5,7 +5,7 @@
 // };
 
 // export type IUpdateUser = {
-//   userId: string;
+//   usersId: string;
 //   name: string;
 //   bio: string;
 //   imageId: string;
@@ -16,27 +16,40 @@
 export type INewHome = {
   userId: string;
   title: string;
-  price: string;
-  address: string;
-  no_of_bathrooms: string;
-  no_of_bedrooms: string;
-  year_built: string;
-  sqm: string;
+  price: number;
+  year_built: number;
   payment_method: string;
+  bathrooms: number;
+  bedrooms: number;
+  toilets: number;
+  address: string;
+  state: string;
+  lga: string;
   description: string;
   features: string;
   files: File[];
 };
 
-// export type IUpdatePost = {
-//   postId: string;
-//   caption: string;
-//   imageId: string;
-//   imageUrl: URL;
-//   file: File[];
-//   location?: string;
-//   tags?: string;
-// };
+export type IUpdateHome = {
+  homeId: string;
+  title: string;
+  price: number;
+  year_built: number;
+  payment_method: string;
+  bathrooms: number;
+  bedrooms: number;
+  toilets: number;
+  address: string;
+  state: string;
+  lga: string;
+  description: string;
+  features: string;
+  files: File[];
+  imageIds: string[];
+  imageUrls: string[];
+  // imageUrls: URL[] | string[];
+  // imageUrls: URL;
+};
 
 export type IUser = {
   id: string;

@@ -125,7 +125,7 @@ export default function Home() {
         title="Featured Properties"
         text="Each listing offers a glimpse into exceptional homes and investments available through KOA properties."
         background="white">
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <HomeCard />
         </SwiperSlide>
         <SwiperSlide>
@@ -139,7 +139,7 @@ export default function Home() {
         </SwiperSlide>
         <SwiperSlide>
           <HomeCard />
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Slider>
 
       <Slider

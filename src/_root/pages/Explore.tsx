@@ -10,9 +10,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { House, MapPin, Proportions, Search, Send, Wallet } from "lucide-react";
-import { HomeCard, SectionHeading } from "@/components/shared";
+import { HomeCard, Loader, SectionHeading } from "@/components/shared";
+import { useGetRecentHomes } from "@/lib/react-query/queries";
+import { Models } from "appwrite";
 
 export default function Explore() {
+  const { data: recentHomes, isPending: isLoadingHomes } = useGetRecentHomes();
+
   return (
     <div className="py-14">
       <div className="bg-accent pb-14">
@@ -85,14 +89,18 @@ export default function Explore() {
               </Select>
             </div>
           </form>
-          <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-x-6 gap-y-8 pt-12">
-            <HomeCard />
-            <HomeCard />
-            <HomeCard />
-            <HomeCard />
-            <HomeCard />
-            <HomeCard />
-          </div>
+
+          {isLoadingHomes ? (
+            <div className="mt-16 flex items-center justify-center">
+              <Loader color="green" size={50} />
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-x-6 gap-y-8 pt-12">
+              {recentHomes?.documents.map((home: Models.Document) => (
+                <HomeCard key={home.$id} home={home} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

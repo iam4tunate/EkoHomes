@@ -20,12 +20,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useCreateHome } from "@/lib/react-query/queries";
+import { useCreateHome, useUpdateHome } from "@/lib/react-query/queries";
 import { useUserContext } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "@/components/shared";
 import FileUploader from "@/components/shared/FileUploader";
 import { Models } from "appwrite";
+import { useToast } from "@/components/ui/use-toast";
 
 type PostFormProps = {
   home?: Models.Document;
@@ -35,31 +36,77 @@ type PostFormProps = {
 export default function HomeForm({ home, action }: PostFormProps) {
   const navigate = useNavigate();
   const { user } = useUserContext();
+  const { toast } = useToast();
 
   const { mutateAsync: createHome, isPending: isCreatingHome } =
     useCreateHome();
+  const { mutateAsync: updateHome, isPending: isUpdatingHome } =
+    useUpdateHome();
 
   const form = useForm<z.infer<typeof HomeValidation>>({
     resolver: zodResolver(HomeValidation),
-    //! default values wil be done later
     defaultValues: {
-      title: home ? home?.title : "",
-      price: home ? home?.price : "",
-      address: home ? home?.address : "",
-      no_of_bathrooms: home ? home?.no_of_bathrooms : "",
-      no_of_bedrooms: home ? home?.no_of_bedrooms : "",
-      year_built: home ? home?.year_built : "",
-      sqm: home ? home?.sqm : "",
-      payment_method: home ? home?.payment_method : "",
-      description: home ? home?.description : "",
-      features: home ? home?.features : "",
+      title: home ? home?.title : "3 bedroom modern duplex",
+      price: home ? home?.price : 150000000,
+      payment_method: home ? home?.payment_method : "per year",
+      year_built: home ? home?.year_built : 2022,
+      bathrooms: home ? home?.bathrooms : 3,
+      bedrooms: home ? home?.bedrooms : 4,
+      toilets: home ? home?.toilets : 4,
+      address: home ? home?.address : "38, opebi road, Adebola house, ikeja",
+      state: home ? home?.state : "per year",
+      lga: home ? home?.lga : "per year",
+      description: home
+        ? home?.description
+        : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non animi rerum, tempora voluptate perspiciatis voluptatum facilis qui dolores nihil vel odit iusto! Doloribus ducimus accusamus maiores, non cumque repellat officiis asperiores minima eveniet laboriosam beatae veritatis corrupti dolorum facilis ipsam assumenda.",
+      features: home
+        ? home?.features.join(".")
+        : "ac conditioner.spacious garage.security",
       files: [],
     },
+    // defaultValues: {
+    //   title: home ? home?.title : "",
+    //   price: home ? home?.price : undefined,
+    //   payment_method: home ? home?.payment_method : "",
+    //   year_built: home ? home?.year_built : undefined,
+    //   bathrooms: home ? home?.bathrooms : undefined,
+    //   bedrooms: home ? home?.bedrooms : undefined,
+    //   toilets: home ? home?.toilets : undefined,
+    //   address: home ? home?.address : "",
+    //   state: home ? home?.state : "",
+    //   lga: home ? home?.lga : "",
+    //   description: home ? home?.description : "",
+    //   features: home ? home?.features.join(".") : "",
+    //   files: [],
+    // },
   });
 
   async function onSubmit(values: z.infer<typeof HomeValidation>) {
-    //!shipped updating for now
+    if (action === "Create" && !values.files.length) {
+      return toast({
+        variant: "warning",
+        description: "Please upload an image before submitting.",
+      });
+    }
 
+    //! updating
+    if (home && action === "Update") {
+      const updatedHome = await updateHome({
+        ...values,
+        homeId: home.$id,
+        imageIds: home?.imageIds,
+        imageUrls: home?.imageUrls,
+      });
+      if (updatedHome) {
+        toast({
+          variant: "success",
+          description: "Document updated successfully.",
+        });
+        return navigate(`/home/${home.$id}`);
+      }
+    }
+
+    //! creating
     const newHome = await createHome({
       ...values,
       userId: user.id,
@@ -89,19 +136,118 @@ export default function HomeForm({ home, action }: PostFormProps) {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="price"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Price</FormLabel>
-                  <FormControl>
-                    <Input type="number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-x-2 gap-y-6">
+              <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Price</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="payment_method"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Payment Method</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="select method" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="monthly">Per Month</SelectItem>
+                        <SelectItem value="yearly">Per Year</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="year_built"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Year Built</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-x-2 gap-y-6">
+              <FormField
+                control={form.control}
+                name="bedrooms"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>No. of Bedrooms</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="bathrooms"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>No. of Bathrooms</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="toilets"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>No. of Toilets</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="address"
@@ -118,82 +264,51 @@ export default function HomeForm({ home, action }: PostFormProps) {
             <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-x-2 gap-y-6">
               <FormField
                 control={form.control}
-                name="no_of_bathrooms"
+                name="state"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>No of Bathrooms</FormLabel>
-                    <FormControl>
-                      <Input type="number" {...field} />
-                    </FormControl>
+                    <FormLabel>State</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="select state" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="monthly">Per Month</SelectItem>
+                        <SelectItem value="yearly">Per Year</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <FormField
                 control={form.control}
-                name="no_of_bedrooms"
+                name="lga"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>No of Bedrooms</FormLabel>
-                    <FormControl>
-                      <Input type="number" {...field} />
-                    </FormControl>
+                    <FormLabel>LGA</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="select lga" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="monthly">Per Month</SelectItem>
+                        <SelectItem value="yearly">Per Year</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
-            <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-x-2 gap-y-6">
-              <FormField
-                control={form.control}
-                name="year_built"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Year Built</FormLabel>
-                    <FormControl>
-                      <Input type="number" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="sqm"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Sqm</FormLabel>
-                    <FormControl>
-                      <Input type="number" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <FormField
-              control={form.control}
-              name="payment_method"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Payment Method</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="monthly or annually" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="monthly">Per Month</SelectItem>
-                      <SelectItem value="yearly">Per Year</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="files"
@@ -203,7 +318,7 @@ export default function HomeForm({ home, action }: PostFormProps) {
                   <FormControl>
                     <FileUploader
                       fieldChange={field.onChange}
-                      mediaUrl={home?.imageUrl}
+                      mediaUrl={home?.imageUrls}
                     />
                   </FormControl>
                   <FormMessage className="shad-form_message" />
@@ -235,7 +350,7 @@ export default function HomeForm({ home, action }: PostFormProps) {
                   <FormLabel>Features</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="add a full-stop . after each feature"
+                      placeholder="Enter features separated by periods (full-stop)"
                       className="resize-none h-32"
                       {...field}
                     />
@@ -245,8 +360,11 @@ export default function HomeForm({ home, action }: PostFormProps) {
               )}
             />
           </div>
-          <Button disabled={isCreatingHome} type="submit" className="w-full">
-            {isCreatingHome ? (
+          <Button
+            disabled={isCreatingHome || isUpdatingHome}
+            type="submit"
+            className="w-full">
+            {isCreatingHome || isUpdatingHome ? (
               <>
                 <Loader color="white" size={20} />
                 <span className="pl-1">Please wait...</span>

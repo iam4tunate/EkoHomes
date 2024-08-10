@@ -106,9 +106,6 @@
   .padY {
     @apply py-14;
   }
-  .shadcn-toast_success {
-    @apply bg-primary text-white;
-  }
 
   /* Custom class to remove number input arrows */
   .no-arrow::-webkit-outer-spin-button,

@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AuthLayout from "../AuthLayout";
 import { LoginValidation } from "@/lib/validation";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,9 @@ import { useLoginUser } from "@/lib/react-query/queries";
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { checkAuthUser } = useUserContext();
+  const from = location.state?.from?.pathname || "/";
   const { mutateAsync: loginUser, isPending: isLogining } = useLoginUser();
 
   const form = useForm<z.infer<typeof LoginValidation>>({
@@ -40,7 +42,7 @@ export default function Login() {
     const isLoggedIn = await checkAuthUser();
     if (isLoggedIn) {
       form.reset();
-      navigate("/");
+      navigate(from, { replace: true });
     }
   }
 

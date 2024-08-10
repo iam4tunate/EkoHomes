@@ -1,6 +1,16 @@
-import { INewHome, INewUser } from "@/types";
-import { createHome, createUser, loginUser, logoutUser } from "../appwrite/api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { INewHome, INewUser, IUpdateHome } from "@/types";
+import {
+  createHome,
+  createUser,
+  deleteHome,
+  getCurrentUser,
+  getHomeById,
+  getRecentHomes,
+  loginUser,
+  logoutUser,
+  updateHome,
+} from "../appwrite/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "./query-keys";
 import { toast } from "@/components/ui/use-toast";
 
@@ -10,13 +20,13 @@ export const useCreateUser = () => {
     onSuccess: () => {
       toast({
         variant: "success",
-        title: "Account creation successful.",
+        description: "Account created successfully.",
       });
     },
     onError: (error) => {
       toast({
         variant: "destructive",
-        title: error.message,
+        description: error.message,
       });
     },
   });
@@ -28,13 +38,13 @@ export const useLoginUser = () => {
     onSuccess: () => {
       toast({
         variant: "success",
-        title: "Login successful",
+        description: "Logged in successfully.",
       });
     },
     onError: (error) => {
       toast({
         variant: "destructive",
-        title: error.message,
+        description: error.message,
       });
     },
   });
@@ -43,6 +53,13 @@ export const useLoginUser = () => {
 export const useLogoutUuser = () => {
   return useMutation({
     mutationFn: logoutUser,
+  });
+};
+
+export const useGetCurrentUser = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+    queryFn: getCurrentUser,
   });
 };
 
@@ -56,13 +73,74 @@ export const useCreateHome = () => {
       });
       toast({
         variant: "success",
-        title: "Home creation successful",
+        description: "Document created successfully.",
       });
     },
     onError: (error) => {
       toast({
         variant: "destructive",
-        title: error.message,
+        description: error.message,
+      });
+    },
+  });
+};
+
+export const useGetRecentHomes = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_RECENT_HOMES],
+    queryFn: getRecentHomes,
+  });
+};
+
+export const useGetHomeById = (homeId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_POST_BY_ID, homeId],
+    queryFn: () => getHomeById(homeId),
+    enabled: !!homeId,
+  });
+};
+
+export const useUpdateHome = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (home: IUpdateHome) => updateHome(home),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
+      });
+    },
+    onError: (error) => {
+      toast({
+        variant: "destructive",
+        description: error.message,
+      });
+    },
+  });
+};
+
+export const useDeleteHome = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      homeId,
+      imageIds,
+    }: {
+      homeId: string | undefined;
+      imageIds: string[];
+    }) => deleteHome(homeId ?? "", imageIds),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_RECENT_HOMES],
+      });
+      toast({
+        variant: "success",
+        description: "Document deleted successfully",
+      });
+    },
+    onError: (error) => {
+      toast({
+        variant: "destructive",
+        description: error.message,
       });
     },
   });

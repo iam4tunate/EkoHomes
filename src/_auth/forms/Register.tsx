@@ -18,12 +18,13 @@ import { useCreateUser } from "@/lib/react-query/queries";
 import { loginUser } from "@/lib/appwrite/api";
 import { useUserContext } from "@/context/AuthContext";
 import Loader from "@/components/shared/Loader";
+import { useEffect } from "react";
 
 export default function Register() {
   const navigate = useNavigate();
   const { mutateAsync: createUser, isPending: isCreatingUser } =
     useCreateUser();
-  const { checkAuthUser } = useUserContext();
+  const { user, checkAuthUser } = useUserContext();
 
   const form = useForm<z.infer<typeof registerValidation>>({
     resolver: zodResolver(registerValidation),
@@ -50,6 +51,10 @@ export default function Register() {
       navigate("/");
     }
   }
+
+  useEffect(() => {
+    if (user.id) navigate("/");
+  }, [navigate, user.id]);
 
   return (
     <AuthLayout img="/public/images/register.jpg">
