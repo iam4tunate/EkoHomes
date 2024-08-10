@@ -56,7 +56,7 @@ export default function FileUploader({
       ) : (
         <div className="flex items-center justify-center flex-col p-7 h-80 lg:h-[350px] bg-accent rounded-lg">
           <img
-            src="/public/images/file-upload.svg"
+            src="/images/file-upload.svg"
             width={96}
             height={77}
             alt="file-upload"

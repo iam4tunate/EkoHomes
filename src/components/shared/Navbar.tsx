@@ -162,7 +162,7 @@ export default function Navbar() {
         {isAuthenticated && (
           <div className="flex items-center gap-x-2 rounded-full px-0.5 py-0.5 border hover:shadow cursor-pointer">
             <img
-              src={user.imageUrl || "/public/images/user-placeholder.png"}
+              src={user.imageUrl || "/images/user-placeholder.png"}
               alt=""
               className="rounded-full w-8 h-8"
             />

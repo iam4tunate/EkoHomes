@@ -35,7 +35,7 @@ export default function Home() {
         <div className="relative xl:h-[45rem] max-xl:h-[35rem] max-md:h-[30rem]">
           <div className="absolute top-0 w-full bottom-0 bg-primary bg-opacity-10" />
           <img
-            src="/public/images/keys.jpg"
+            src="/images/keys.jpg"
             alt="keys"
             className="h-full object-cover object-bottom w-full"
           />
@@ -61,7 +61,7 @@ export default function Home() {
             <span>Learn more</span> <MoveRight size={15} />
           </div>
           <img
-            src="/public/images/property_sales.png"
+            src="/images/property_sales.png"
             alt=""
             className="absolute bottom-3 right-3 w-[7rem] max-sm:w-[8rem]"
           />
@@ -80,7 +80,7 @@ export default function Home() {
             <span>Learn more</span> <MoveRight size={15} />
           </div>
           <img
-            src="/public/images/property_manage.png"
+            src="/images/property_manage.png"
             alt=""
             className="absolute bottom-3 right-3 w-[7rem] max-sm:w-[8rem]"
           />
@@ -99,7 +99,7 @@ export default function Home() {
             <span>Learn more</span> <MoveRight size={15} />
           </div>
           <img
-            src="/public/images/consultation_service.png"
+            src="/images/consultation_service.png"
             alt=""
             className="absolute bottom-3 right-3 w-[7rem] max-sm:w-[8rem]"
           />
@@ -118,7 +118,7 @@ export default function Home() {
             <span>Learn more</span> <MoveRight size={15} />
           </div>
           <img
-            src="/public/images/development.png"
+            src="/images/development.png"
             alt=""
             className="absolute bottom-3 right-3 w-[7rem] max-sm:w-[8rem]"
           />
@@ -162,7 +162,7 @@ export default function Home() {
             </p>
             <div className="flex items-center pt-4">
               <img
-                src="/public/images/passport.jpg"
+                src="/images/passport.jpg"
                 alt="avatar"
                 className="w-10 h-10 object-cover object-top rounded-full"
               />
@@ -183,7 +183,7 @@ export default function Home() {
             </p>
             <div className="flex items-center pt-4">
               <img
-                src="/public/images/passport.jpg"
+                src="/images/passport.jpg"
                 alt="avatar"
                 className="w-10 h-10 object-cover object-top rounded-full"
               />
@@ -204,7 +204,7 @@ export default function Home() {
             </p>
             <div className="flex items-center pt-4">
               <img
-                src="/public/images/passport.jpg"
+                src="/images/passport.jpg"
                 alt="avatar"
                 className="w-10 h-10 object-cover object-top rounded-full"
               />
@@ -225,7 +225,7 @@ export default function Home() {
             </p>
             <div className="flex items-center pt-4">
               <img
-                src="/public/images/passport.jpg"
+                src="/images/passport.jpg"
                 alt="avatar"
                 className="w-10 h-10 object-cover object-top rounded-full"
               />
@@ -241,7 +241,7 @@ export default function Home() {
       <div className="padX padY container grid grid-cols-2 max-lg:grid-cols-1">
         <div className="w-[80%] max-sm:w-full max-lg:pb-8 max-sm:pb-4">
           <img
-            src="/public/images/stars-green.svg"
+            src="/images/stars-green.svg"
             alt=""
             className="w-12 max-sm:w-10 mb-1 max-sm:mb-0.5"
           />

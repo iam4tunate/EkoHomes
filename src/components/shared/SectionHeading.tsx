@@ -1,5 +1,5 @@
-import starsGreen from "/public/images/stars-green.svg";
-import starsWhite from "/public/images/stars-white.svg";
+import starsGreen from "/images/stars-green.svg";
+import starsWhite from "/images/stars-white.svg";
 
 export default function SectionHeading({
   icon,

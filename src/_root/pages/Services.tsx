@@ -45,27 +45,27 @@ export default function Services() {
       />
       <div className="py-3" />
       <Service
-        img="/public/images/service.png"
+        img="/images/service.png"
         heading="Property Sales"
         text="Explore a diverse portfolio of properties for sale, including residential homes, commercial spaces, land parcels, and investment properties. With our in-depth knowledge of the market and personalized approach, we help you find the perfect property that aligns with your preferences, budget, and lifestyle."
         btnText="View Property"
       />
       <Service
         right
-        img="/public/images/service.png"
+        img="/images/service.png"
         heading="Property Management"
         text="Entrust your property management needs to our experienced team and enjoy peace of mind knowing that your investment is in capable hands. From tenant screening and rent collection to maintenance and repairs, we handle every aspect of property management efficiently and professionally."
         btnText="Call Us"
       />
       <Service
-        img="/public/images/service2.png"
+        img="/images/service2.png"
         heading="Consultation Services"
         text="Benefit from expert advice and insights tailored to your specific real estate goals. Whether you're looking to buy, sell, rent, or invest, our seasoned professionals provide strategic guidance and actionable recommendations to help you make informed decisions and achieve optimal outcomes."
         btnText="Call Us"
       />
       <Service
         right
-        img="/public/images/service.png"
+        img="/images/service.png"
         heading="Property Development"
         text="our Property Development service is designed to bring your vision to life. We handle every aspect of development, from initial concept to final construction, ensuring seamless execution and exceptional quality. Our team of experienced professionals works diligently to create innovative, sustainable, and aesthetically pleasing properties that meet the highest standards."
         btnText="Call Us"

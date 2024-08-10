@@ -47,7 +47,7 @@ export default function Login() {
   }
 
   return (
-    <AuthLayout img="/public/images/login.jpg">
+    <AuthLayout img="/images/login.jpg">
       <div className="padX padY sm:max-w-xl mx-auto w-full">
         <div className="text-center">
           <h4>

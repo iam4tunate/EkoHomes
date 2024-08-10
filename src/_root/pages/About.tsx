@@ -8,7 +8,7 @@ export default function About() {
       <div className="max-lg:padX grid grid-cols-2 max-lg:grid-cols-1 items-center justify-between">
         <div className="lg:padX py-12 lg:max-w-2xl ml-auto  max-lg:w-full max-lg:ml-">
           <img
-            src="/public/images/stars-green.svg"
+            src="/images/stars-green.svg"
             alt=""
             className="w-12 max-sm:w-10 mb-1 max-sm:mb-0.5"
           />
@@ -37,7 +37,7 @@ export default function About() {
         </div>
         <div className="max-lg:hidden">
           <img
-            src="/public/images/houseOnHand.svg"
+            src="/images/houseOnHand.svg"
             alt="house on hand"
             className="w-full object-cover ml-auto"
           />
@@ -48,7 +48,7 @@ export default function About() {
         <div className="container padX py-14 grid grid-cols-[40%_55%] max-lg:grid-cols-1 justify-between gap-x-12">
           <div className="max-lg:pb-8 max-sm:pb-4 max-lg:w-[70%] max-sm:w-full">
             <img
-              src="/public/images/stars-white.svg"
+              src="/images/stars-white.svg"
               alt=""
               className="w-12 max-sm:w-10 mb-1 max-sm:mb-0.5"
             />

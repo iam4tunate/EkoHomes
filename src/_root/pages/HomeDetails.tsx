@@ -162,7 +162,7 @@ export default function HomeDetails() {
       <div className="pt-14 grid grid-cols-[40%_60%] gap-x-12 gap-y-8 max-lg:grid-cols-1">
         <div className="max-lg:w-[70%] max-sm:w-full">
           <img
-            src="/public/images/stars-green.svg"
+            src="/images/stars-green.svg"
             alt="stars"
             className="w-12 max-sm:w-10 mb-1 max-sm:mb-0.5"
           />

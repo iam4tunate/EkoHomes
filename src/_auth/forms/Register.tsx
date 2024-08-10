@@ -57,7 +57,7 @@ export default function Register() {
   }, [navigate, user.id]);
 
   return (
-    <AuthLayout img="/public/images/register.jpg">
+    <AuthLayout img="/images/register.jpg">
       <div className="padX padY sm:max-w-xl mx-auto w-full">
         <div className="text-center">
           <h4>Hello, valued client, please proceed to create your account.</h4>

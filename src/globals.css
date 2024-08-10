@@ -62,27 +62,27 @@
 @layer base {
   @font-face {
     font-family: geist-bold;
-    src: url(/public/fonts/Geist-Bold.otf);
+    src: url(/fonts/Geist-Bold.otf);
   }
   @font-face {
     font-family: geist-semibold;
-    src: url(/public/fonts/Geist-SemiBold.otf);
+    src: url(/fonts/Geist-SemiBold.otf);
   }
   @font-face {
     font-family: geist-medium;
-    src: url(/public/fonts/Geist-Medium.otf);
+    src: url(/fonts/Geist-Medium.otf);
   }
   @font-face {
     font-family: geist-regular;
-    src: url(/public/fonts/Geist-Regular.otf);
+    src: url(/fonts/Geist-Regular.otf);
   }
   @font-face {
     font-family: geist-light;
-    src: url(/public/fonts/Geist-Light.otf);
+    src: url(/fonts/Geist-Light.otf);
   }
   @font-face {
     font-family: geist-ultralight;
-    src: url(/public/fonts/Geist-Thin.otf);
+    src: url(/fonts/Geist-Thin.otf);
   }
 
   * {
