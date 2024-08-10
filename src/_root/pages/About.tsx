@@ -1,4 +1,5 @@
-import { Cta, SectionHeading } from "@/components/shared";
+import { SectionHeading } from "@/components/shared";
+import Cta from "@/components/shared/Cta";
 import { GraduationCap, Handshake, Star, Users } from "lucide-react";
 
 export default function About() {

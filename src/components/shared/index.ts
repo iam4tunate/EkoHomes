@@ -1,4 +1,3 @@
-export { default as Cta } from "./Cta";
 export { default as Footer } from "./Footer";
 export { default as HomeCard } from "./HomeCard";
 export { default as Loader } from "./Loader";

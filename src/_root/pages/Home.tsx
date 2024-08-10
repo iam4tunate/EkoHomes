@@ -7,8 +7,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@radix-ui/react-accordion";
-import { Cta, Slider } from "@/components/shared";
+import { Slider } from "@/components/shared";
 import { Link } from "react-router-dom";
+import Cta from "@/components/shared/Cta";
 
 export default function Home() {
   return (
