@@ -12,7 +12,7 @@ export default function FileUploader({
   mediaUrl,
 }: FileUploaderProps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [files, setFiles] = useState<File[]>([]);
+  const [_, setFiles] = useState<File[]>([]);
   const [fileUrls, setFileUrls] = useState<string[]>(mediaUrl ? mediaUrl : []);
 
   const onDrop = useCallback(
