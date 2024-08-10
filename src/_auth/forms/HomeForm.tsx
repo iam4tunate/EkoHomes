@@ -107,13 +107,20 @@ export default function HomeForm({ home, action }: PostFormProps) {
     }
 
     //! creating
-    const newHome = await createHome({
-      ...values,
-      userId: user.id,
-    });
+    if (!user.id) {
+      return toast({
+        variant: "warning",
+        description: "Sorry, you do not have access to create a document.",
+      });
+    } else {
+      const newHome = await createHome({
+        ...values,
+        userId: user.id,
+      });
 
-    if (!newHome) throw Error;
-    navigate("/explore");
+      if (!newHome) throw Error;
+      navigate("/explore");
+    }
   }
 
   return (
