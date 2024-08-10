@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
 
-export default function Cta() {
+export default function StartJourney() {
   return (
     <div className="padX padY container">
       <div className="bg-primary text-white rounded-lg py-8 px-6 max-md:px-4 flex max-lg:flex-col max-lg:gap-y-6 max-lg:items-start items-center justify-between">

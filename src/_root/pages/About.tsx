@@ -1,5 +1,5 @@
 import { SectionHeading } from "@/components/shared";
-import Cta from "@/components/shared/Cta";
+import StartJourney from "@/components/shared/StartJourney";
 import { GraduationCap, Handshake, Star, Users } from "lucide-react";
 
 export default function About() {
@@ -147,7 +147,7 @@ export default function About() {
         </div>
       </div>
 
-      <Cta />
+      <StartJourney />
     </div>
   );
 }

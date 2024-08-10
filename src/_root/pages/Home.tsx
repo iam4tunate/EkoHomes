@@ -9,7 +9,7 @@ import {
 } from "@radix-ui/react-accordion";
 import { Slider } from "@/components/shared";
 import { Link } from "react-router-dom";
-import Cta from "@/components/shared/Cta";
+import StartJourney from "@/components/shared/StartJourney";
 
 export default function Home() {
   return (
@@ -287,7 +287,7 @@ export default function Home() {
         </div>
       </div>
 
-      <Cta />
+      <StartJourney />
     </div>
   );
 }
