@@ -14,7 +14,7 @@ export default function HomeCard({ home }: { home: Models.Document }) {
   };
 
   return (
-    <div className="border rounded-lg w-full py-4 px-3 max-sm:p-2.5 bg-white">
+    <div className="border rounded-xl w-full py-4 px-3 max-sm:p-2.5 bg-white">
       <img
         src={home.imageUrls[0]}
         alt="property"

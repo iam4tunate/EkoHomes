@@ -7,8 +7,10 @@ export default function Logo({ bg }: { bg?: boolean }) {
         src={`/public/images/${bg ? "logo-white" : "logo"}.png`}
         alt="logo"
         className={`${
-          bg ? "w-[150px]" : "w-[120px]"
-        } max-md:w-[120px] max-sm:w-[100px] object-cover`}
+          bg
+            ? "w-[150px] max-md:w-[120px] max-sm:w-[100px]"
+            : "w-[100px] max-sm:w-[80px]"
+        }  object-cover`}
       />
     </Link>
   );

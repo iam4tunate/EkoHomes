@@ -1,9 +1,3 @@
-// export type INavLink = {
-//   imgURL: string;
-//   route: string;
-//   label: string;
-// };
-
 // export type IUpdateUser = {
 //   usersId: string;
 //   name: string;
@@ -12,6 +6,12 @@
 //   imageUrl: URL | string;
 //   file: File[];
 // };
+
+export type INavLink = {
+  icon: React.ReactNode;
+  route: string;
+  label: string;
+};
 
 export type INewHome = {
   userId: string;

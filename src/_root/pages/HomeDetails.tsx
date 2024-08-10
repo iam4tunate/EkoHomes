@@ -4,17 +4,17 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDeleteHome, useGetHomeById } from "@/lib/react-query/queries";
-import { Loader } from "@/components/shared";
+import { GalleryThumb, Loader } from "@/components/shared";
 import { formatNumberWithCommas } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
 import {
   Bath,
   Bed,
   Send,
-  Sparkle,
   MapPin,
   FilePenLine,
   Trash2,
+  ShowerHead,
 } from "lucide-react";
 import {
   AlertDialog,
@@ -28,6 +28,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/components/ui/use-toast";
+import ToggleDisplayLength from "@/components/shared/ToggleDisplayLength";
 
 export default function HomeDetails() {
   const { id } = useParams();
@@ -61,23 +62,23 @@ export default function HomeDetails() {
           <Loader color="green" size={50} />
         </div>
       ) : (
-        <div className="grid grid-cols-2 max-md:grid-cols-1">
+        <div className="grid grid-cols-2 gap-x-12 gap-y-14 max-md:grid-cols-1">
           <div className="">
-            {home?.imageUrls.map((url: string) => (
-              <img src={url} />
-            ))}
+            <GalleryThumb urls={home?.imageUrls} />
           </div>
           <div className="">
             <div className="pb-8">
-              <div className="flex flex-wrap gap-x-8 gap-y-1 items-center justify-between">
+              <div className="">
                 <h4 className="capitalize">{home?.title}</h4>
-                <p className="text-xl font-geist600">
-                  {formatNumberWithCommas(home?.price)}
+                <p className="text-xl font-geist600 pt-3">
+                  {formatNumberWithCommas(home?.price)}/{home?.payment_method}
                 </p>
               </div>
               <p className="flex items-start gap-x-1 pt-3 pb-3 text-sm">
                 <MapPin size={15} className="text-primary mt-0.5" />
-                <span>{home?.address}</span>
+                <span>
+                  {home?.address}, {home?.lga}, {home?.state}
+                </span>
               </p>
               <p className="text-sm w-[90%] max-lg:w-full">
                 {home?.description}
@@ -92,7 +93,7 @@ export default function HomeDetails() {
                 </div>
                 <div className="border rounded-lg py-2 px-4">
                   <div className="flex items-end gap-x-1 pb-1">
-                    <Bath className="text-primary w-5 h-5" />
+                    <ShowerHead className="text-primary w-5 h-5" />
                     <span className="text-[13px]">Bathrooms</span>
                   </div>
                   <span className="font-geist500">{home?.bathrooms}</span>
@@ -108,17 +109,7 @@ export default function HomeDetails() {
             </div>
             <div className="">
               <div className="font-geist500 pb-1">Features & Amenities</div>
-              <div className="space-y-3">
-                {home?.features.map((feature: string) => (
-                  <div className="flex items-center gap-x-2 bg-accent py-3 px-2">
-                    <Sparkle
-                      size={20}
-                      className="text-xs fill-primary text-primary"
-                    />
-                    <span className="text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
+              <ToggleDisplayLength items={home?.features} maxItems={3} />
             </div>
             <div className="flex items-center text-sm gap-x-5 pt-8">
               <Link

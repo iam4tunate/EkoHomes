@@ -36,7 +36,7 @@ export default function UpdateHome() {
     <div className="max-w-screen-md mx-auto padY padX">
       <div className="w-[70%] max-sm:w-full pb-4 flex items-center gap-x-2 text-primary">
         <FilePenLine size={30} />
-        <h4>Update Home</h4>
+        <h4>Update Home Details</h4>
       </div>
       <HomeForm action="Update" home={home} />
     </div>

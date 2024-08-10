@@ -7,7 +7,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@radix-ui/react-accordion";
-import { Cta, HomeCard, Slider } from "@/components/shared";
+import { Cta, Slider } from "@/components/shared";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -23,7 +24,9 @@ export default function Home() {
               our listings to find the home that matches you dream.
             </p>
             <div className="flex justify-center gap-x-8 gap-y-3 max-sm:flex-col">
-              <Button>Explore Properties</Button>
+              <Link to="/explore">
+                <Button>Explore Properties</Button>
+              </Link>
               <Button variant="outline">Contact us</Button>
             </div>
           </div>
@@ -121,13 +124,10 @@ export default function Home() {
         </div>
       </div>
 
-      <Slider
+      {/* <Slider
         title="Featured Properties"
         text="Each listing offers a glimpse into exceptional homes and investments available through KOA properties."
         background="white">
-        {/* <SwiperSlide>
-          <HomeCard />
-        </SwiperSlide>
         <SwiperSlide>
           <HomeCard />
         </SwiperSlide>
@@ -139,8 +139,11 @@ export default function Home() {
         </SwiperSlide>
         <SwiperSlide>
           <HomeCard />
-        </SwiperSlide> */}
-      </Slider>
+        </SwiperSlide>
+        <SwiperSlide>
+          <HomeCard />
+        </SwiperSlide>
+      </Slider> */}
 
       <Slider
         title="What Our Client Say"

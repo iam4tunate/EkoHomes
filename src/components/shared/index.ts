@@ -7,3 +7,5 @@ export { default as Navbar } from "./Navbar";
 export { default as ScrollToTop } from "./ScrollToTop";
 export { default as SectionHeading } from "./SectionHeading";
 export { default as Slider } from "./Slider";
+export { default as GalleryThumb } from "./GalleryThumb";
+export { default as FileUploader } from "./FileUploader";

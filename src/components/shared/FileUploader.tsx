@@ -32,7 +32,7 @@ export default function FileUploader({
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {
-      "image/*": [".png", ".jpeg", ".jpg", ".svg"],
+      "image/*": [".png", ".jpeg", ".jpg"],
     },
     multiple: true,
   });
@@ -44,13 +44,13 @@ export default function FileUploader({
       <input {...getInputProps()} className="cursor-pointer" />
       {fileUrls.length > 0 ? (
         <>
-          <div className="flex flex-wrap flex-1 justify-center w-full p-5 lg:p-10 max-h-[15rem] overflow-y-auto">
+          <div className="flex flex-wrap gap-3 flex-1 justify-center w-full p-5 overflow-y-auto bg-accent rounded-xl">
             {fileUrls.map((url) => (
               <img src={url} alt="image" className="w-24" />
             ))}
           </div>
-          <p className="pt-2 text-center text-sm font-geist500">
-            Click or drag & drop photo to replace.
+          <p className="pt-2 text-center text-sm">
+            Click or drag & drop photo to replace
           </p>
         </>
       ) : (

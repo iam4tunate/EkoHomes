@@ -46,39 +46,20 @@ export default function HomeForm({ home, action }: PostFormProps) {
   const form = useForm<z.infer<typeof HomeValidation>>({
     resolver: zodResolver(HomeValidation),
     defaultValues: {
-      title: home ? home?.title : "3 bedroom modern duplex",
-      price: home ? home?.price : 150000000,
-      payment_method: home ? home?.payment_method : "per year",
-      year_built: home ? home?.year_built : 2022,
-      bathrooms: home ? home?.bathrooms : 3,
-      bedrooms: home ? home?.bedrooms : 4,
-      toilets: home ? home?.toilets : 4,
-      address: home ? home?.address : "38, opebi road, Adebola house, ikeja",
-      state: home ? home?.state : "per year",
-      lga: home ? home?.lga : "per year",
-      description: home
-        ? home?.description
-        : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non animi rerum, tempora voluptate perspiciatis voluptatum facilis qui dolores nihil vel odit iusto! Doloribus ducimus accusamus maiores, non cumque repellat officiis asperiores minima eveniet laboriosam beatae veritatis corrupti dolorum facilis ipsam assumenda.",
-      features: home
-        ? home?.features.join(".")
-        : "ac conditioner.spacious garage.security",
+      title: home ? home?.title : "",
+      price: home ? home?.price : undefined,
+      payment_method: home ? home?.payment_method : "",
+      year_built: home ? home?.year_built : undefined,
+      bathrooms: home ? home?.bathrooms : undefined,
+      bedrooms: home ? home?.bedrooms : undefined,
+      toilets: home ? home?.toilets : undefined,
+      address: home ? home?.address : "",
+      state: home ? home?.state : "",
+      lga: home ? home?.lga : "",
+      description: home ? home?.description : "",
+      features: home ? home?.features.join(".") : "",
       files: [],
     },
-    // defaultValues: {
-    //   title: home ? home?.title : "",
-    //   price: home ? home?.price : undefined,
-    //   payment_method: home ? home?.payment_method : "",
-    //   year_built: home ? home?.year_built : undefined,
-    //   bathrooms: home ? home?.bathrooms : undefined,
-    //   bedrooms: home ? home?.bedrooms : undefined,
-    //   toilets: home ? home?.toilets : undefined,
-    //   address: home ? home?.address : "",
-    //   state: home ? home?.state : "",
-    //   lga: home ? home?.lga : "",
-    //   description: home ? home?.description : "",
-    //   features: home ? home?.features.join(".") : "",
-    //   files: [],
-    // },
   });
 
   async function onSubmit(values: z.infer<typeof HomeValidation>) {
@@ -176,8 +157,8 @@ export default function HomeForm({ home, action }: PostFormProps) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="monthly">Per Month</SelectItem>
-                        <SelectItem value="yearly">Per Year</SelectItem>
+                        <SelectItem value="month">Monthly</SelectItem>
+                        <SelectItem value="year">Yearly</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
