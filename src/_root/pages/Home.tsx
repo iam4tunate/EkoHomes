@@ -10,6 +10,7 @@ import {
 import { Slider } from "@/components/shared";
 import { Link } from "react-router-dom";
 import StartJourney from "@/components/shared/StartJourney";
+import { testimonies } from "@/lib/constants";
 
 export default function Home() {
   return (
@@ -17,7 +18,7 @@ export default function Home() {
       <div className="">
         <div className="padX pt-16 flex flex-col items-center">
           <div className="text-center w-[50%] max-lg:w-[70%] max-sm:w-full pb-12">
-            <div className="text-6xl max-md:text-5xl max-sm:text-4xl font-geist700 max-md:font-geist600 uppercase leading-none tracking-tighter">
+            <div className="text-6xl max-md:text-5xl max-sm:text-4xl font-geist700 max-md:font-geist700 uppercase leading-none tracking-tighter">
               Discover your dream Home.
             </div>
             <p className="pt-5 pb-6 w-[70%] max-sm:w-full mx-auto">
@@ -26,7 +27,7 @@ export default function Home() {
             </p>
             <div className="flex justify-center gap-x-8 gap-y-3 max-sm:flex-col">
               <Link to="/explore">
-                <Button>Explore Properties</Button>
+                <Button className="w-full">Explore Properties</Button>
               </Link>
               <Button variant="outline">Contact us</Button>
             </div>
@@ -149,93 +150,27 @@ export default function Home() {
       <Slider
         title="What Our Client Say"
         text="Read the success stories and heartfelt testimonials from our valued
-            clients. Discover why they chose Estatein for their real estate
+            clients. Discover why they chose EkoHomes for their real estate
             needs."
         background="green">
-        <SwiperSlide>
-          <div className="pt-8 bg-gray-100 text-foreground px-4 py-4 rounded-lg">
-            <div className=" text-lg font-geist600">Exceptional Service!</div>
-            <p className="text-sm leading-tight pt-2 pb-3">
-              Our experience with KOA was outstanding. Their team&apos;s
-              dedication and professionalism made finding our dream home a
-              breeze. Highly recommended!
-            </p>
-            <div className="flex items-center pt-4">
-              <img
-                src="/images/passport.jpg"
-                alt="avatar"
-                className="w-10 h-10 object-cover object-top rounded-full"
-              />
-              <div className="text-sm pl-3">
-                <p className="font-geist500">Wande Jamiu</p>
-                <p className="text-xs">Lagos, Nigeria</p>
+        {testimonies.map((testimony) => (
+          <SwiperSlide key={testimony.title}>
+            <div className="pt-8 bg-gray-100 text-foreground px-4 py-4 rounded-lg">
+              <div className="leading-tight text-lg font-geist600">
+                {testimony.title}
+              </div>
+              <p className="text-sm leading-normal pt-2 pb-3">
+                {testimony.testimony}
+              </p>
+              <div className="flex items-center pt-3">
+                <div className="text-sm">
+                  <p className="font-geist500">{testimony.name}</p>
+                  <p className="text-xs">{testimony.location}</p>
+                </div>
               </div>
             </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="pt-8 bg-gray-100 text-foreground px-4 py-4 rounded-lg">
-            <div className=" text-lg font-geist600">Exceptional Service!</div>
-            <p className="text-sm leading-tight pt-2 pb-3">
-              Our experience with KOA was outstanding. Their team&apos;s
-              dedication and professionalism made finding our dream home a
-              breeze. Highly recommended!
-            </p>
-            <div className="flex items-center pt-4">
-              <img
-                src="/images/passport.jpg"
-                alt="avatar"
-                className="w-10 h-10 object-cover object-top rounded-full"
-              />
-              <div className="text-sm pl-3">
-                <p className="font-geist500">Wande Jamiu</p>
-                <p className="text-xs">Lagos, Nigeria</p>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="pt-8 bg-gray-100 text-foreground px-4 py-4 rounded-lg">
-            <div className=" text-lg font-geist600">Exceptional Service!</div>
-            <p className="text-sm leading-tight pt-2 pb-3">
-              Our experience with KOA was outstanding. Their team&apos;s
-              dedication and professionalism made finding our dream home a
-              breeze. Highly recommended!
-            </p>
-            <div className="flex items-center pt-4">
-              <img
-                src="/images/passport.jpg"
-                alt="avatar"
-                className="w-10 h-10 object-cover object-top rounded-full"
-              />
-              <div className="text-sm pl-3">
-                <p className="font-geist500">Wande Jamiu</p>
-                <p className="text-xs">Lagos, Nigeria</p>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="pt-8 bg-gray-100 text-foreground px-4 py-4 rounded-lg">
-            <div className=" text-lg font-geist600">Exceptional Service!</div>
-            <p className="text-sm leading-tight pt-2 pb-3">
-              Our experience with KOA was outstanding. Their team&apos;s
-              dedication and professionalism made finding our dream home a
-              breeze. Highly recommended!
-            </p>
-            <div className="flex items-center pt-4">
-              <img
-                src="/images/passport.jpg"
-                alt="avatar"
-                className="w-10 h-10 object-cover object-top rounded-full"
-              />
-              <div className="text-sm pl-3">
-                <p className="font-geist500">Wande Jamiu</p>
-                <p className="text-xs">Lagos, Nigeria</p>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
+          </SwiperSlide>
+        ))}
       </Slider>
 
       <div className="padX padY container grid grid-cols-2 max-lg:grid-cols-1">

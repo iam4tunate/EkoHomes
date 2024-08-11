@@ -14,7 +14,7 @@ export default function Footer() {
   return (
     <footer className="bg-primary pt-12 pb-8">
       <div className="container padX text-white text-opacity-90">
-        <div className="grid grid-cols-[2fr_1fr_2fr_1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 gap-y-12 max-lg:gap-x-24 gap-x-16 mb-12">
+        <div className="grid grid-cols-[2fr_1fr_2fr_1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 gap-y-8 max-lg:gap-x-24 gap-x-16 mb-12">
           <div>
             <div className="w-fit">
               <Logo bg />
@@ -25,7 +25,7 @@ export default function Footer() {
             </p>
           </div>
           <div className="">
-            <span className="text-lg max-sm:text-base">Navigation</span>
+            <span className="text-lg max-sm:text-base font-geist500">Navigation</span>
             <ul className="pt-3 space-y-5 flex flex-col text-sm">
               <Link to="/" className="underline w-fit">
                 Home
@@ -45,7 +45,7 @@ export default function Footer() {
             </ul>
           </div>
           <div className="">
-            <span className="text-lg max-sm:text-base">Contact Info</span>
+            <span className="text-lg max-sm:text-base font-geist500">Contact Info</span>
             <div className="grid grid-cols-[auto_1fr] items-start gap-x-2 pt-3 pb-3">
               <MapPin size={20} />
               <div className="flex flex-col gap-y-2.5">
@@ -66,7 +66,7 @@ export default function Footer() {
             </span>
           </div>
           <div className="">
-            <span className="text-lg max-sm:text-base">Get In Touch</span>
+            <span className="text-lg max-sm:text-base font-geist500">Get In Touch</span>
             <div className="flex items-start gap-x-2 pt-3 pb-5">
               <Phone size={20} />
               <ul className="text-sm space-y-1">
@@ -86,9 +86,9 @@ export default function Footer() {
           <span className="">
             Copyright © 2024 Propertyspace. All Rights Reserved
           </span>
-          <div className="flex items-center flex-wrap gap-x-2">
+          {/* <div className="flex items-center flex-wrap gap-x-2">
             <span>Privacy Policy</span> | <span>Terms & Conditions</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

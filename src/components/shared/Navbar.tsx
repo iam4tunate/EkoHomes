@@ -54,14 +54,16 @@ export default function Navbar() {
         <Sheet>
           <SheetTrigger asChild>
             <div className="cursor-pointer">
-              <MenuIcon />
+              <MenuIcon className="w-7 h-7" />
             </div>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] md:w-[350px] px-3">
+          <SheetContent
+            side="left"
+            className="w-[300px] md:w-[350px] max-[310px]:w-full px-3">
             <div className="pb-8 px-4">
               <Logo />
             </div>
-            <div className="pb-1 font-geist500 px-4 text-sm">Navigation</div>
+            <div className="pb-1 font-geist600 px-4 text-sm">Navigation</div>
             <ul className="space-y-2">
               <SheetClose asChild>
                 <NavLink
@@ -104,11 +106,11 @@ export default function Navbar() {
                 </NavLink>
               </SheetClose>
             </ul>
-            <div className="pb-1 font-geist500 px-4 text-sm pt-8">Account</div>
+            <div className="pb-1 font-geist600 px-4 text-sm pt-8">Account</div>
             <ul className="space-y-2 relative">
               <SheetClose asChild>
                 <NavLink
-                  to="/"
+                  to="/listings"
                   className={`${
                     pathname === "/listings" && activeLink
                   } flex items-center gap-x-3 py-2.5 px-4`}>
@@ -159,18 +161,18 @@ export default function Navbar() {
           </SheetContent>
         </Sheet>
 
-        {isAuthenticated && (
+        {(isAuthenticated || user.id) && (
           <div className="flex items-center gap-x-2 rounded-full px-0.5 py-0.5 border hover:shadow cursor-pointer">
             <img
               src={user.imageUrl || "/images/user-placeholder.png"}
               alt=""
-              className="rounded-full w-8 h-8"
+              className="rounded-full w-10 h-10"
             />
           </div>
         )}
         {!isAuthenticated && !isUserLoadng && (
           <Link to="/login">
-            <Button>Login</Button>
+            <Button>Log in</Button>
           </Link>
         )}
       </div>

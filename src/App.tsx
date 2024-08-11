@@ -14,6 +14,7 @@ import {
   UpdateHome,
 } from "./_root/pages";
 import PrivateRoutes from "./lib/PrivateRoutes";
+import Listings from "./_root/pages/Listings";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
             <Route element={<PrivateRoutes />}>
               <Route path="/create" element={<CreateHome />} />
               <Route path="/update/:id" element={<UpdateHome />} />
+              <Route path="/listings" element={<Listings />} />
             </Route>
 
             {/* public routes  */}

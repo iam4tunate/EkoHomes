@@ -61,9 +61,11 @@ export default function FileUploader({
             height={77}
             alt="file-upload"
           />
-          <h4 className="mb-2 mt-6">Drag & drop photo here</h4>
-          <p className="mb-6">SVG, PNG, JPG</p>
-          <Button className="bg-primary">Select from computer</Button>
+          <h4 className="text-xl max-sm:text-lg font-geist600 mb-2 mt-6 max-sm:mt-4">
+            Drag & drop photo here
+          </h4>
+          <p className="mb-6 text-sm">JPEG, PNG, JPG</p>
+          <Button className="bg-primary">Select from device</Button>
         </div>
       )}
     </div>

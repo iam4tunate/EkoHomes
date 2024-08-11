@@ -9,7 +9,7 @@ export default function Logo({ bg }: { bg?: boolean }) {
         className={`${
           bg
             ? "w-[150px] max-md:w-[120px] max-sm:w-[100px]"
-            : "w-[100px] max-sm:w-[80px]"
+            : "w-[120px] max-sm:w-[100px]"
         }  object-cover`}
       />
     </Link>

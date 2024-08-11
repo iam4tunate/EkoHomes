@@ -173,6 +173,14 @@ export async function getHomeById(homeId: string) {
   return home;
 }
 
+export async function getHomesByUserId(userId: string) {
+  const homes = await databases.listDocuments(
+    appwriteConfig.databaseId,
+    appwriteConfig.homesCollectionId,
+    [Query.contains("creator", userId)]
+  );
+  return homes;
+}
 export async function updateHome(home: IUpdateHome) {
   const hasFilesToUpdate = home.files.length > 0;
   const uploadedFiles: UploadedFile[] = [];

@@ -62,7 +62,7 @@ export default function HomeDetails() {
           <Loader color="green" size={50} />
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-x-12 gap-y-14 max-md:grid-cols-1">
+        <div className="grid grid-cols-2 gap-x-12 gap-y-7 max-md:grid-cols-1">
           <div className="">
             <GalleryThumb urls={home?.imageUrls} />
           </div>
@@ -74,13 +74,13 @@ export default function HomeDetails() {
                   {formatNumberWithCommas(home?.price)}/{home?.payment_method}
                 </p>
               </div>
-              <p className="flex items-start gap-x-1 pt-3 pb-3 text-sm">
+              <p className="flex items-start gap-x-1 pt-3 pb-2 text-sm">
                 <MapPin size={15} className="text-primary mt-0.5" />
                 <span>
                   {home?.address}, {home?.lga}, {home?.state}
                 </span>
               </p>
-              <p className="text-sm w-[90%] max-lg:w-full">
+              <p className="w-[90%] max-lg:w-full">
                 {home?.description}
               </p>
               <div className="flex flex-wrap items-center gap-x-3 gap-y-4 pt-5">

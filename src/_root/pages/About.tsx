@@ -59,13 +59,18 @@ export default function About() {
               platform that transcended the ordinary.
             </p>
           </div>
-          <div className="border border-white border-opacity-20 text-opacity-90 px-8 max-sm:px-4 py-12 grid grid-cols-2 max-sm:grid-cols-1 gap-x-8 gap-y-10 rounded-xl">
+          <div className="border border-white border-opacity-20 text-opacity-90 px-8 max-sm:px-4 py-12 max-sm:py-10 grid grid-cols-2 max-sm:grid-cols-1 gap-x-8 gap-y-10 rounded-xl">
             <div className="">
               <div className="flex items-center gap-x-2">
                 <div className="border-2 border-white border-opacity-80 rounded-full p-2">
-                  <Handshake color="#fff" size={23} />
+                  <Handshake
+                    color="#fff"
+                    className="h-6 max-sm:h-4 w-6 max-sm:w-4"
+                  />
                 </div>
-                <div className="text-lg font-medium">Trust</div>
+                <div className="text-lg max-sm:text-base font-geist600">
+                  Trust
+                </div>
               </div>
               <p className="text-sm pt-2">
                 Trust is the cornerstone of every successful real estate
@@ -75,9 +80,9 @@ export default function About() {
             <div className="">
               <div className="flex items-center gap-x-2">
                 <div className="border-2 border-white border-opacity-80 rounded-full p-2">
-                  <GraduationCap color="#fff" size={23} />
+                  <GraduationCap color="#fff" className="h-6 max-sm:h-4 w-6 max-sm:w-4" />
                 </div>
-                <div className="text-lg font-medium">Excelence</div>
+                <div className="text-lg max-sm:text-base font-geist600">Excelence</div>
               </div>
               <p className="text-sm pt-2">
                 We set the bar high for ourselves. From the properties we list
@@ -87,9 +92,9 @@ export default function About() {
             <div className="">
               <div className="flex items-center gap-x-2">
                 <div className="border-2 border-white border-opacity-80 rounded-full p-2">
-                  <Users color="#ffffff" size={23} />
+                  <Users color="#ffffff" className="h-6 max-sm:h-4 w-6 max-sm:w-4" />
                 </div>
-                <div className="text-lg font-medium">Client-Centric</div>
+                <div className="text-lg max-sm:text-base font-geist600">Client-Centric</div>
               </div>
               <p className="text-sm pt-2">
                 Your dreams and needs are at the center of our universe. We
@@ -99,9 +104,9 @@ export default function About() {
             <div className="">
               <div className="flex items-center gap-x-2">
                 <div className="border-2 border-white border-opacity-80 rounded-full p-2">
-                  <Star color="#fff" size={23} />
+                  <Star color="#fff" className="h-6 max-sm:h-4 w-6 max-sm:w-4" />
                 </div>
-                <div className="text-lg font-medium">Our Commitment</div>
+                <div className="text-lg max-sm:text-base font-geist600">Our Commitment</div>
               </div>
               <p className="text-sm pt-2">
                 We are dedicated to providing you with the highest level of

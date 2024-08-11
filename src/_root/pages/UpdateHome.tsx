@@ -20,7 +20,7 @@ export default function UpdateHome() {
         variant: "warning",
         description: "Sorry, you do not have access to update this document.",
       });
-      navigate(`/home/${id}`);
+      navigate("/explore");
     }
   }, [home, user, navigate, toast, id]);
 
