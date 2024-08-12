@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const INITIAL_USER = {
   id: "",
+  accountId: "",
   first_name: "",
   last_name: "",
   phone_number: "",
@@ -47,9 +48,11 @@ export default function AuthProvider({
     setIsLoading(true);
     try {
       const currentAccount = await getCurrentUser();
+      console.log(currentAccount);
       if (currentAccount) {
         setUser({
           id: currentAccount.$id,
+          accountId: currentAccount.accountId,
           first_name: currentAccount.first_name,
           last_name: currentAccount.last_name,
           phone_number: currentAccount.phone_number,

@@ -15,7 +15,7 @@ import { useGetRecentHomes } from "@/lib/react-query/queries";
 import { Models } from "appwrite";
 
 export default function Explore() {
-  const { data: recentHomes, isPending: isLoadingHomes } = useGetRecentHomes();
+  const { data: homes, isPending: isLoading } = useGetRecentHomes();
 
   return (
     <div className="py-14">
@@ -90,13 +90,13 @@ export default function Explore() {
             </div>
           </form>
 
-          {isLoadingHomes ? (
+          {isLoading ? (
             <div className="mt-16 flex items-center justify-center">
               <Loader color="green" size={50} />
             </div>
           ) : (
             <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-x-6 gap-y-8 pt-12">
-              {recentHomes?.documents.map((home: Models.Document) => (
+              {homes?.documents.map((home: Models.Document) => (
                 <HomeCard key={home.$id} home={home} />
               ))}
             </div>

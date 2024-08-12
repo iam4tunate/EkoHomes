@@ -5,7 +5,9 @@ import {
   deleteHome,
   getCurrentUser,
   getHomeById,
+  getHomesByCreatorId,
   getRecentHomes,
+  getUserById,
   loginUser,
   logoutUser,
   updateHome,
@@ -94,9 +96,17 @@ export const useGetRecentHomes = () => {
 
 export const useGetHomeById = (homeId: string) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_POST_BY_ID, homeId],
+    queryKey: [QUERY_KEYS.GET_HOME_BY_ID, homeId],
     queryFn: () => getHomeById(homeId),
     enabled: !!homeId,
+  });
+};
+
+export const useGetHomesByCreatorId = (id: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_HOMES_BY_CREATOR_ID, id],
+    queryFn: () => getHomesByCreatorId(id),
+    enabled: !!id,
   });
 };
 
@@ -106,7 +116,7 @@ export const useUpdateHome = () => {
     mutationFn: (home: IUpdateHome) => updateHome(home),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
+        queryKey: [QUERY_KEYS.GET_HOME_BY_ID, data?.$id],
       });
     },
     onError: (error) => {
@@ -143,5 +153,13 @@ export const useDeleteHome = () => {
         description: error.message,
       });
     },
+  });
+};
+
+export const useGetUserById = (id: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USER_BY_ID, id],
+    queryFn: () => getUserById(id),
+    enabled: !!id,
   });
 };

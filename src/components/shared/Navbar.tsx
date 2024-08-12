@@ -26,12 +26,12 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const { user, isLoading: isUserLoadng, isAuthenticated } = useUserContext();
   const { mutate: logout, isSuccess } = useLogoutUuser();
-
+  console.log("user", user);
   useEffect(() => {
     if (isSuccess) navigate(0);
   }, [navigate, isSuccess]);
 
-  const activeLink = "bg-primary bg-opacity-15 text-primary rounded-full";
+  const activeLink = "bg-primary bg-opacity-15 text-primary";
 
   return (
     <div className="flex items-center justify-between container padX h-20 border-b">
@@ -64,13 +64,15 @@ export default function Navbar() {
               <Logo />
             </div>
             <div className="pb-1 font-geist600 px-4 text-sm">Navigation</div>
-            <ul className="space-y-2">
+            <ul>
               <SheetClose asChild>
                 <NavLink
                   to="/"
                   className={`${
-                    pathname === "/" && activeLink
-                  } flex items-center gap-x-3 py-2.5 px-4`}>
+                    pathname === "/"
+                      ? activeLink
+                      : "hover:bg-primary hover:bg-opacity-5"
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
                   <Home size={20} />
                   <span className="font-geist500 text-[15px]">Home</span>
                 </NavLink>
@@ -79,8 +81,10 @@ export default function Navbar() {
                 <NavLink
                   to="/about"
                   className={`${
-                    pathname === "/about" && activeLink
-                  } flex items-center gap-x-3 py-2.5 px-4`}>
+                    pathname === "/about"
+                      ? activeLink
+                      : "hover:bg-primary hover:bg-opacity-5"
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
                   <UserRoundCheck size={20} />
                   <span className="font-geist500 text-[15px]">About us</span>
                 </NavLink>
@@ -89,8 +93,10 @@ export default function Navbar() {
                 <NavLink
                   to="/services"
                   className={`${
-                    pathname === "/services" && activeLink
-                  } flex items-center gap-x-3 py-2.5 px-4`}>
+                    pathname === "/services"
+                      ? activeLink
+                      : "hover:bg-primary hover:bg-opacity-5"
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
                   <BriefcaseBusiness size={20} />
                   <span className="font-geist500 text-[15px]">Services</span>
                 </NavLink>
@@ -99,21 +105,25 @@ export default function Navbar() {
                 <NavLink
                   to="/explore"
                   className={`${
-                    pathname === "/explore" && activeLink
-                  } flex items-center gap-x-3 py-2.5 px-4`}>
+                    pathname === "/explore"
+                      ? activeLink
+                      : "hover:bg-primary hover:bg-opacity-5"
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
                   <Telescope size={20} />
                   <span className="font-geist500 text-[15px]">Explore</span>
                 </NavLink>
               </SheetClose>
             </ul>
             <div className="pb-1 font-geist600 px-4 text-sm pt-8">Account</div>
-            <ul className="space-y-2 relative">
+            <ul className="space-y-1">
               <SheetClose asChild>
                 <NavLink
-                  to="/listings"
+                  to={`/listings/${user.id}`}
                   className={`${
-                    pathname === "/listings" && activeLink
-                  } flex items-center gap-x-3 py-2.5 px-4`}>
+                    pathname === `/listings/${user.id}`
+                      ? activeLink
+                      : "hover:bg-primary hover:bg-opacity-5"
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
                   <List size={20} />
                   <span className="font-geist500 text-[15px]">Listings</span>
                 </NavLink>
@@ -122,8 +132,10 @@ export default function Navbar() {
                 <NavLink
                   to="/create"
                   className={`${
-                    pathname === "/create" && activeLink
-                  } flex items-center gap-x-3 py-2.5 px-4`}>
+                    pathname === "/create"
+                      ? activeLink
+                      : "hover:bg-primary hover:bg-opacity-5"
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
                   <HousePlus size={20} />
                   <span className="font-geist500 text-[15px]">Create</span>
                 </NavLink>
@@ -132,13 +144,15 @@ export default function Navbar() {
                 <NavLink
                   to="/profile"
                   className={`${
-                    pathname === "/profile" && activeLink
-                  } flex items-center gap-x-3 py-2.5 px-4`}>
+                    pathname === "/profile"
+                      ? activeLink
+                      : "hover:bg-primary hover:bg-opacity-5"
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
                   <UserRoundPen size={20} />
                   <span className="font-geist500 text-[15px]">Profile</span>
                 </NavLink>
               </SheetClose>
-              <div className="absolute w-full pt-6">
+              <div className="pt-6">
                 {isAuthenticated ? (
                   <SheetClose asChild>
                     <Button

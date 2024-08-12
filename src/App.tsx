@@ -22,11 +22,11 @@ export default function App() {
       <ScrollToTop>
         <Routes>
           <Route element={<RootLayout />}>
+            <Route path="/create" element={<CreateHome />} />
             {/* private routes  */}
             <Route element={<PrivateRoutes />}>
-              <Route path="/create" element={<CreateHome />} />
               <Route path="/update/:id" element={<UpdateHome />} />
-              <Route path="/listings" element={<Listings />} />
+              <Route path="/listings/:id" element={<Listings />} />
             </Route>
 
             {/* public routes  */}

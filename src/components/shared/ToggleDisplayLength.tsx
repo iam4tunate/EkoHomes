@@ -30,9 +30,9 @@ export default function ToggleDisplayLength({
       {items.length > maxItems && (
         <div
           onClick={toggleShowAll}
-          className="w-fit mt-3 self-center text-sm py-1 px-2 rounded-lg flex items-center gap-x-0.5 cursor-pointer">
+          className="w-fit mt-3 self-center py-1 px-2 rounded-lg flex items-center gap-x-0.5 cursor-pointer text-xs">
           {showAll ? "Show Less" : "Show More"}
-          <ChevronDown size={15}/>
+          <ChevronDown size={15} />
         </div>
       )}
     </div>

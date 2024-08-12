@@ -173,14 +173,6 @@ export async function getHomeById(homeId: string) {
   return home;
 }
 
-export async function getHomesByUserId(userId: string) {
-  const homes = await databases.listDocuments(
-    appwriteConfig.databaseId,
-    appwriteConfig.homesCollectionId,
-    [Query.contains("creator", userId)]
-  );
-  return homes;
-}
 export async function updateHome(home: IUpdateHome) {
   const hasFilesToUpdate = home.files.length > 0;
   const uploadedFiles: UploadedFile[] = [];
@@ -271,4 +263,23 @@ export async function deleteHome(homeId: string, imageIds: string[]) {
   if (deleteHome) {
     return { status: "ok" };
   }
+}
+
+//! getDocument \ listDocuments
+export async function getHomesByCreatorId(id: string) {
+  const homes = await databases.listDocuments(
+    appwriteConfig.databaseId,
+    appwriteConfig.homesCollectionId,
+    [Query.equal("creator", id)]
+  );
+  return homes;
+}
+
+export async function getUserById(id: string) {
+  const user = await databases.getDocument(
+    appwriteConfig.databaseId,
+    appwriteConfig.usersCollectionId,
+    id
+  );
+  return user;
 }

@@ -35,13 +35,13 @@ export default function HomeDetails() {
   const { user } = useUserContext();
   const navigate = useNavigate();
   const { toast } = useToast();
-
   const { data: home, isPending: isLoadingHome } = useGetHomeById(id || "");
   const {
     mutateAsync: deleteHome,
     isSuccess: homeDeleted,
     isPending: isDeleting,
   } = useDeleteHome();
+  console.log(home);
 
   const handleClick = () => {
     if (home?.creator.$id !== user.id) {
@@ -80,9 +80,7 @@ export default function HomeDetails() {
                   {home?.address}, {home?.lga}, {home?.state}
                 </span>
               </p>
-              <p className="w-[90%] max-lg:w-full">
-                {home?.description}
-              </p>
+              <p className="w-[90%] max-lg:w-full text-[15px] leading-snug">{home?.description}</p>
               <div className="flex flex-wrap items-center gap-x-3 gap-y-4 pt-5">
                 <div className="border rounded-lg py-2 px-4">
                   <div className="flex items-end gap-x-1 pb-1">
@@ -110,6 +108,26 @@ export default function HomeDetails() {
             <div className="">
               <div className="font-geist500 pb-1">Features & Amenities</div>
               <ToggleDisplayLength items={home?.features} maxItems={3} />
+            </div>
+            <div className="shadow-lg py-6 px-4 rounded-lg mb-12">
+              <div className="flex items-center gap-x-4">
+                <img
+                  src={home?.creator.imageUrl}
+                  alt="agent"
+                  className="w-16 h-16 rounded-full"
+                />
+                <div className="">
+                  <div className="capitalize font-geist600">
+                    {home?.creator.first_name} {home?.creator.last_name}
+                  </div>
+                  <p className="text-sm">
+                    View more listings from this{" "}
+                    <Link to={`/listings/${home?.creator.$id}`}>
+                      <span className="text-primary underline">agent</span>
+                    </Link>
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="flex items-center text-sm gap-x-5 pt-8">
               <Link
@@ -166,7 +184,7 @@ export default function HomeDetails() {
             alt="stars"
             className="w-12 max-sm:w-10 mb-1 max-sm:mb-0.5"
           />
-          <h3>Inquire about Seaside Serenity Villa.</h3>
+          <h3>Inquire about {home?.title}.</h3>
           <p className="leading-snug pt-2 text-[15px]">
             Ready to take the first step toward your dream property? Fill out
             the form below, and our real estate wizards will work their magic to

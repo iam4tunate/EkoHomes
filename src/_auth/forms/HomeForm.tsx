@@ -100,7 +100,7 @@ export default function HomeForm({ home, action }: PostFormProps) {
       });
 
       if (!newHome) throw Error;
-      navigate("/explore");
+      navigate("/listings");
     }
   }
 

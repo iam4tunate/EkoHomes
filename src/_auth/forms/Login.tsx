@@ -22,8 +22,8 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const { checkAuthUser } = useUserContext();
-  const from = location.state?.from?.pathname || "/";
   const { mutateAsync: loginUser, isPending: isLogining } = useLoginUser();
+  const from = location.state?.from?.pathname || "/";
 
   const form = useForm<z.infer<typeof LoginValidation>>({
     resolver: zodResolver(LoginValidation),
