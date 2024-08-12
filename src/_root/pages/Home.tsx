@@ -21,7 +21,7 @@ export default function Home() {
             <div className="text-6xl max-md:text-5xl max-sm:text-4xl font-geist700 max-md:font-geist700 uppercase leading-none tracking-tighter">
               Discover your dream Home.
             </div>
-            <p className="pt-5 pb-6 w-[70%] max-sm:w-full mx-auto">
+            <p className="pt-5 pb-6 w-[70%] max-sm:w-full mx-auto leading-snug">
               Your journey for finding the perfect property begins here. Explore
               our listings to find the home that matches you dream.
             </p>
