@@ -24,7 +24,7 @@ import {
 export default function Navbar() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { user, isLoading: isUserLoadng, isAuthenticated } = useUserContext();
+  const { user, isAuthenticated } = useUserContext();
   const { mutate: logout, isSuccess } = useLogoutUuser();
   console.log("user", user);
   useEffect(() => {
