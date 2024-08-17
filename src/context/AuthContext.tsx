@@ -1,16 +1,16 @@
-import { getCurrentUser } from "@/lib/appwrite/api";
-import { IUser } from "@/types";
-import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { getCurrentUser } from '@/lib/appwrite/api';
+import { IUser } from '@/types';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const INITIAL_USER = {
-  id: "",
-  accountId: "",
-  first_name: "",
-  last_name: "",
-  phone_number: "",
-  email: "",
-  imageUrl: "",
+  id: '',
+  accountId: '',
+  first_name: '',
+  last_name: '',
+  phone_number: '',
+  email: '',
+  imageUrl: '',
+  label: '',
 };
 
 const INITIAL_STATE = {
@@ -42,13 +42,11 @@ export default function AuthProvider({
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const navigate = useNavigate();
-
   const checkAuthUser = async () => {
     setIsLoading(true);
     try {
       const currentAccount = await getCurrentUser();
-      console.log(currentAccount);
+      console.log('curr', currentAccount);
       if (currentAccount) {
         setUser({
           id: currentAccount.$id,
@@ -58,6 +56,7 @@ export default function AuthProvider({
           phone_number: currentAccount.phone_number,
           email: currentAccount.email,
           imageUrl: currentAccount.imageUrl,
+          label: currentAccount.label,
         });
         setIsAuthenticated(true);
         return true;
@@ -72,7 +71,7 @@ export default function AuthProvider({
 
   useEffect(() => {
     checkAuthUser();
-  }, [navigate]);
+  }, []);
 
   const value = {
     user,

@@ -1,9 +1,9 @@
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Button } from "../ui/button";
-import { useUserContext } from "@/context/AuthContext";
-import { useEffect } from "react";
-import { useLogoutUuser } from "@/lib/react-query/queries";
-import Logo from "./Logo";
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Button } from '../ui/button';
+import { useUserContext } from '@/context/AuthContext';
+import { useEffect } from 'react';
+import { useLogoutUuser } from '@/lib/react-query/queries';
+import Logo from './Logo';
 import {
   BriefcaseBusiness,
   Home,
@@ -13,28 +13,29 @@ import {
   Telescope,
   UserRoundCheck,
   UserRoundPen,
-} from "lucide-react";
+} from 'lucide-react';
 import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
+import Loader from './Loader';
 
 export default function Navbar() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { user, isAuthenticated } = useUserContext();
+  const { user, isAuthenticated, isLoading: isUserLoading } = useUserContext();
   const { mutate: logout, isSuccess } = useLogoutUuser();
-  console.log("user", user);
+  console.log('user', user);
   useEffect(() => {
     if (isSuccess) navigate(0);
   }, [navigate, isSuccess]);
 
-  const activeLink = "bg-primary bg-opacity-15 text-primary";
+  const activeLink = 'bg-primary bg-opacity-15 text-primary';
 
   return (
-    <div className="flex items-center justify-between container padX h-20 border-b">
+    <div className='flex items-center justify-between container padX h-20 border-b'>
       <Logo />
       {/* <ul className="max-md:hidden ml-auto flex items-center gap-x-12 text-sm pr-8">
         <li>
@@ -50,124 +51,137 @@ export default function Navbar() {
           <Link to="/explore">Explore</Link>
         </li>
       </ul> */}
-      <div className="flex items-center gap-x-2">
+      <div className='flex items-center gap-x-2'>
         <Sheet>
           <SheetTrigger asChild>
-            <div className="cursor-pointer">
-              <MenuIcon className="w-7 h-7" />
+            <div className='cursor-pointer'>
+              <MenuIcon className='w-7 h-7' />
             </div>
           </SheetTrigger>
           <SheetContent
-            side="left"
-            className="w-[300px] md:w-[350px] max-[310px]:w-full px-3">
-            <div className="pb-8 px-4">
+            side='left'
+            className='w-[300px] md:w-[350px] max-[310px]:w-full px-3'>
+            <div className='pb-8 px-4'>
               <Logo />
             </div>
-            <div className="pb-1 font-geist600 px-4 text-sm">Navigation</div>
+            <div className='pb-1 font-geist600 px-4 text-sm'>Navigation</div>
             <ul>
               <SheetClose asChild>
                 <NavLink
-                  to="/"
+                  to='/'
                   className={`${
-                    pathname === "/"
+                    pathname === '/'
                       ? activeLink
-                      : "hover:bg-primary hover:bg-opacity-5"
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
+                      : 'hover:bg-primary hover:bg-opacity-5'
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
                   <Home size={20} />
-                  <span className="font-geist500 text-[15px]">Home</span>
+                  <span className='font-geist500 text-[15px]'>Home</span>
                 </NavLink>
               </SheetClose>
               <SheetClose asChild>
                 <NavLink
-                  to="/about"
+                  to='/about'
                   className={`${
-                    pathname === "/about"
+                    pathname === '/about'
                       ? activeLink
-                      : "hover:bg-primary hover:bg-opacity-5"
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
+                      : 'hover:bg-primary hover:bg-opacity-5'
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
                   <UserRoundCheck size={20} />
-                  <span className="font-geist500 text-[15px]">About us</span>
+                  <span className='font-geist500 text-[15px]'>About us</span>
                 </NavLink>
               </SheetClose>
               <SheetClose asChild>
                 <NavLink
-                  to="/services"
+                  to='/services'
                   className={`${
-                    pathname === "/services"
+                    pathname === '/services'
                       ? activeLink
-                      : "hover:bg-primary hover:bg-opacity-5"
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
+                      : 'hover:bg-primary hover:bg-opacity-5'
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
                   <BriefcaseBusiness size={20} />
-                  <span className="font-geist500 text-[15px]">Services</span>
+                  <span className='font-geist500 text-[15px]'>Services</span>
                 </NavLink>
               </SheetClose>
               <SheetClose asChild>
                 <NavLink
-                  to="/explore"
+                  to='/explore'
                   className={`${
-                    pathname === "/explore"
+                    pathname === '/explore'
                       ? activeLink
-                      : "hover:bg-primary hover:bg-opacity-5"
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
+                      : 'hover:bg-primary hover:bg-opacity-5'
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
                   <Telescope size={20} />
-                  <span className="font-geist500 text-[15px]">Explore</span>
+                  <span className='font-geist500 text-[15px]'>Explore</span>
                 </NavLink>
               </SheetClose>
             </ul>
-            <div className="pb-1 font-geist600 px-4 text-sm pt-8">Account</div>
-            <ul className="space-y-1">
+            <div className='pb-1 font-geist600 px-4 text-sm pt-8'>Account</div>
+            <ul className='space-y-1'>
               <SheetClose asChild>
                 <NavLink
                   to={`/listings/${user.id}`}
                   className={`${
                     pathname === `/listings/${user.id}`
                       ? activeLink
-                      : "hover:bg-primary hover:bg-opacity-5"
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
+                      : 'hover:bg-primary hover:bg-opacity-5'
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
                   <List size={20} />
-                  <span className="font-geist500 text-[15px]">Listings</span>
+                  <span className='font-geist500 text-[15px]'>Listings</span>
                 </NavLink>
               </SheetClose>
               <SheetClose asChild>
                 <NavLink
-                  to="/create"
+                  to='/create'
                   className={`${
-                    pathname === "/create"
+                    pathname === '/create'
                       ? activeLink
-                      : "hover:bg-primary hover:bg-opacity-5"
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
+                      : 'hover:bg-primary hover:bg-opacity-5'
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
                   <HousePlus size={20} />
-                  <span className="font-geist500 text-[15px]">Create</span>
+                  <span className='font-geist500 text-[15px]'>Create</span>
                 </NavLink>
               </SheetClose>
-              <SheetClose asChild>
-                <NavLink
-                  to="/profile"
-                  className={`${
-                    pathname === "/profile"
-                      ? activeLink
-                      : "hover:bg-primary hover:bg-opacity-5"
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-full`}>
-                  <UserRoundPen size={20} />
-                  <span className="font-geist500 text-[15px]">Profile</span>
-                </NavLink>
-              </SheetClose>
-              <div className="pt-6">
+              {isAuthenticated && (
+                <SheetClose asChild>
+                  <NavLink
+                    to='/profile'
+                    className={`${
+                      pathname === '/profile'
+                        ? activeLink
+                        : 'hover:bg-primary hover:bg-opacity-5'
+                    } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                    <UserRoundPen size={20} />
+                    <span className='font-geist500 text-[15px]'>Profile</span>
+                  </NavLink>
+                </SheetClose>
+              )}
+              <div className='pt-6 space-y-3'>
+                {user.id &&
+                  user.label !== 'agent' &&
+                  user.label !== 'admin' && (
+                    <SheetClose asChild>
+                      <Link to='/apply'>
+                        <Button className='w-full bg-primary text-white'>
+                          Become an Agent
+                        </Button>
+                      </Link>
+                    </SheetClose>
+                  )}
                 {isAuthenticated ? (
                   <SheetClose asChild>
                     <Button
                       onClick={() => logout()}
-                      className="w-full bg-red-100 text-destructive hover:bg-red-300">
+                      className='w-full bg-red-100 text-destructive hover:bg-red-300'>
                       Log out
                     </Button>
                   </SheetClose>
                 ) : (
                   <SheetClose asChild>
-                    <Link to="/login">
-                      <Button className="w-full bg-primary text-white">
-                        Log in
-                      </Button>
-                    </Link>
+                    <Button
+                      onClick={() => navigate('/login')}
+                      className='w-full bg-primary'>
+                      Log in
+                    </Button>
                   </SheetClose>
                 )}
               </div>
@@ -175,20 +189,31 @@ export default function Navbar() {
           </SheetContent>
         </Sheet>
 
-        {user.id && (
-          <div className="flex items-center gap-x-2 rounded-full px-0.5 py-0.5 border hover:shadow cursor-pointer">
+        {isUserLoading ? (
+          <Loader color='green' size={20} />
+        ) : isAuthenticated && !isUserLoading ? (
+          <div className='flex items-center gap-x-2 rounded-full px-0.5 py-0.5 border hover:shadow cursor-pointer'>
             <img
-              src={user.imageUrl || "/images/user-placeholder.png"}
-              alt=""
-              className="rounded-full w-10 h-10"
+              src={user.imageUrl || '/images/user-placeholder.png'}
+              alt=''
+              className='rounded-full w-10 h-10'
             />
           </div>
-        )}
-        {!user.id && (
-          <Link to="/login">
-            <Button>Log in</Button>
+        ) : null}
+
+        {user.id && user.label !== 'agent' && user.label !== 'admin' && (
+          <Link to='/apply' className='max-md:hidden'>
+            <Button>Become an Agent</Button>
           </Link>
         )}
+
+        <Link
+          to='/login'
+          className={`pl-3 cursor-pointer py-2 px-3 hover:bg-primary hover:bg-opacity-10 text-primary rounded-md text-[15px] font-geist500 ${
+            (isAuthenticated || isUserLoading) && 'hidden'
+          }`}>
+          Log in
+        </Link>
       </div>
     </div>
   );

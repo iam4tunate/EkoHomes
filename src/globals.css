@@ -89,13 +89,13 @@
     @apply border-border scroll-smooth;
   }
   body {
-    @apply bg-[#fffcfc] font-geist400 text-[#0c0d0f] tracking-normal;
+    @apply bg-[#fffcfc] font-geist400 text-[#0c0d0f] leading-snug;
   }
   h3 {
     @apply text-3xl max-md:text-2xl font-geist600;
   }
   h4 {
-    @apply text-2xl font-geist600 leading-7;
+    @apply text-2xl max-md:text-xl font-geist600 leading-7;
   }
 }
 

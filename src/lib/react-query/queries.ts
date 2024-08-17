@@ -1,4 +1,4 @@
-import { INewHome, INewUser, IUpdateHome } from "@/types";
+import { INewHome, INewUser, IUpdateHome, IUpgradeAgent } from '@/types';
 import {
   createHome,
   createUser,
@@ -11,23 +11,24 @@ import {
   loginUser,
   logoutUser,
   updateHome,
-} from "../appwrite/api";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { QUERY_KEYS } from "./query-keys";
-import { toast } from "@/components/ui/use-toast";
+  upgradeToAgent,
+} from '../appwrite/api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QUERY_KEYS } from './query-keys';
+import { toast } from '@/components/ui/use-toast';
 
 export const useCreateUser = () => {
   return useMutation({
     mutationFn: (user: INewUser) => createUser(user),
     onSuccess: () => {
       toast({
-        variant: "success",
-        description: "Account created successfully.",
+        variant: 'success',
+        description: 'Account created successfully.',
       });
     },
     onError: (error) => {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: error.message,
       });
     },
@@ -39,13 +40,13 @@ export const useLoginUser = () => {
     mutationFn: (user: { email: string; password: string }) => loginUser(user),
     onSuccess: () => {
       toast({
-        variant: "success",
-        description: "Logged in successfully.",
+        variant: 'success',
+        description: 'Logged in successfully.',
       });
     },
     onError: (error) => {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: error.message,
       });
     },
@@ -69,18 +70,22 @@ export const useCreateHome = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (home: INewHome) => createHome(home),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log('first', data);
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_HOMES],
       });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_HOMES_BY_CREATOR_ID, data.$id],
+      });
       toast({
-        variant: "success",
-        description: "Document created successfully.",
+        variant: 'success',
+        description: 'Home listing created successfully.',
       });
     },
     onError: (error) => {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: error.message,
       });
     },
@@ -121,7 +126,7 @@ export const useUpdateHome = () => {
     },
     onError: (error) => {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: error.message,
       });
     },
@@ -137,19 +142,19 @@ export const useDeleteHome = () => {
     }: {
       homeId: string | undefined;
       imageIds: string[];
-    }) => deleteHome(homeId ?? "", imageIds),
+    }) => deleteHome(homeId ?? '', imageIds),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_RECENT_HOMES],
       });
       toast({
-        variant: "success",
-        description: "Document deleted successfully",
+        variant: 'success',
+        description: 'Home listing deleted successfully',
       });
     },
     onError: (error) => {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: error.message,
       });
     },
@@ -161,5 +166,26 @@ export const useGetUserById = (id: string) => {
     queryKey: [QUERY_KEYS.GET_USER_BY_ID, id],
     queryFn: () => getUserById(id),
     enabled: !!id,
+  });
+};
+
+export const useUpgradeToAgent = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (user: IUpgradeAgent) => upgradeToAgent(user),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_USER_BY_ID, data.$id],
+      });
+    },
+    onError: (error) => {
+      toast({
+        variant: 'destructive',
+        description: error.message,
+      });
+    },
   });
 };

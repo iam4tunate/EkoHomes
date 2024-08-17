@@ -36,9 +36,9 @@ export default function Home() {
         <div className="relative xl:h-[45rem] max-xl:h-[35rem] max-md:h-[30rem]">
           <div className="absolute top-0 w-full bottom-0 bg-primary bg-opacity-10" />
           <img
-            src="/images/keys.jpg"
+            src="/public/images/agent.jpg"
             alt="keys"
-            className="h-full object-cover object-bottom w-full"
+            className="h-full object-cover object-center w-full"
           />
         </div>
       </div>

@@ -1,6 +1,6 @@
-import { INewHome, INewUser, IUpdateHome } from "@/types";
-import { account, appwriteConfig, avatars, databases, storage } from "./config";
-import { ID, Query } from "appwrite";
+import { INewHome, INewUser, IUpdateHome, IUpgradeAgent } from '@/types';
+import { account, appwriteConfig, avatars, databases, storage } from './config';
+import { ID, Query } from 'appwrite';
 
 export async function createUser(user: INewUser) {
   const name = `${user.first_name} ${user.last_name}`;
@@ -22,6 +22,7 @@ export async function createUser(user: INewUser) {
     email: newAccount.email,
     imageUrl: avatarUrl,
   });
+
   return newUser;
 }
 
@@ -37,7 +38,7 @@ export async function saveUserToDB(user: {
     appwriteConfig.databaseId,
     appwriteConfig.usersCollectionId,
     ID.unique(),
-    user
+    { ...user, label: 'client' }
   );
   return newUser;
 }
@@ -56,27 +57,27 @@ export async function getCurrentUser() {
   const currentUser = await databases.listDocuments(
     appwriteConfig.databaseId,
     appwriteConfig.usersCollectionId,
-    [Query.equal("accountId", currentAccount.$id)]
+    [Query.equal('accountId', currentAccount.$id)]
   );
   if (!currentUser) throw Error;
   return currentUser.documents[0];
 }
 
 export async function logoutUser() {
-  const session = await account.deleteSession("current");
+  const session = await account.deleteSession('current');
   return session;
 }
 
 export async function createHome(home: INewHome) {
   const uploadedFiles: UploadedFile[] = [];
-
+  console.log(home);
   try {
     for (const file of home.files) {
       const uploadedFile = await uploadFile(file);
       if (uploadedFile) {
         uploadedFiles.push(uploadedFile);
       } else {
-        throw new Error("File upload failed.");
+        throw new Error('File upload failed.');
       }
     }
 
@@ -90,7 +91,7 @@ export async function createHome(home: INewHome) {
     });
 
     const features =
-      home.features?.split(/\.\s*/).filter((str) => str !== "") || [];
+      home.features?.split(/\.\s*/).filter((str) => str !== '') || [];
 
     const newHome = await databases.createDocument(
       appwriteConfig.databaseId,
@@ -152,14 +153,14 @@ export function getFilePreview(fileId: string) {
 
 export async function deleteFile(fileId: string) {
   await storage.deleteFile(appwriteConfig.storageId, fileId);
-  return { status: "ok" };
+  return { status: 'ok' };
 }
 
 export async function getRecentHomes() {
   const homes = await databases.listDocuments(
     appwriteConfig.databaseId,
     appwriteConfig.homesCollectionId,
-    [Query.orderDesc("$createdAt"), Query.limit(20)]
+    [Query.orderDesc('$createdAt'), Query.limit(20)]
   );
   return homes;
 }
@@ -198,7 +199,7 @@ export async function updateHome(home: IUpdateHome) {
         if (uploadedFile) {
           uploadedFiles.push(uploadedFile);
         } else {
-          throw new Error("File upload failed.");
+          throw new Error('File upload failed.');
         }
       }
 
@@ -218,7 +219,7 @@ export async function updateHome(home: IUpdateHome) {
     }
 
     const features =
-      home.features?.split(/\.\s*/).filter((str) => str !== "") || [];
+      home.features?.split(/\.\s*/).filter((str) => str !== '') || [];
 
     const updatedHome = await databases.updateDocument(
       appwriteConfig.databaseId,
@@ -261,7 +262,7 @@ export async function deleteHome(homeId: string, imageIds: string[]) {
     await deleteFile(fileId);
   }
   if (deleteHome) {
-    return { status: "ok" };
+    return { status: 'ok' };
   }
 }
 
@@ -270,7 +271,7 @@ export async function getHomesByCreatorId(id: string) {
   const homes = await databases.listDocuments(
     appwriteConfig.databaseId,
     appwriteConfig.homesCollectionId,
-    [Query.equal("creator", id)]
+    [Query.equal('creator', id), Query.orderDesc('$createdAt')]
   );
   return homes;
 }
@@ -282,4 +283,17 @@ export async function getUserById(id: string) {
     id
   );
   return user;
+}
+
+export async function upgradeToAgent(data: IUpgradeAgent) {
+  const upgradedAgent = await databases.updateDocument(
+    appwriteConfig.databaseId,
+    appwriteConfig.usersCollectionId,
+    data.id,
+    {
+      agency_name: data.agency_name,
+      label: data.label,
+    }
+  );
+  return upgradedAgent;
 }

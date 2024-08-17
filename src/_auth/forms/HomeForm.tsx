@@ -1,9 +1,9 @@
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { HomeValidation } from "@/lib/validation";
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { HomeValidation } from '@/lib/validation';
 import {
   Form,
   FormControl,
@@ -11,26 +11,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useCreateHome, useUpdateHome } from "@/lib/react-query/queries";
-import { useUserContext } from "@/context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { Loader } from "@/components/shared";
-import FileUploader from "@/components/shared/FileUploader";
-import { Models } from "appwrite";
-import { useToast } from "@/components/ui/use-toast";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { useCreateHome, useUpdateHome } from '@/lib/react-query/queries';
+import { useUserContext } from '@/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { Loader } from '@/components/shared';
+import FileUploader from '@/components/shared/FileUploader';
+import { Models } from 'appwrite';
+import { useToast } from '@/components/ui/use-toast';
 
 type PostFormProps = {
   home?: Models.Document;
-  action: "Create" | "Update";
+  action: 'Create' | 'Update';
 };
 
 export default function HomeForm({ home, action }: PostFormProps) {
@@ -46,32 +46,32 @@ export default function HomeForm({ home, action }: PostFormProps) {
   const form = useForm<z.infer<typeof HomeValidation>>({
     resolver: zodResolver(HomeValidation),
     defaultValues: {
-      title: home ? home?.title : "",
+      title: home ? home?.title : '',
       price: home ? home?.price : undefined,
-      payment_method: home ? home?.payment_method : "",
+      payment_method: home ? home?.payment_method : '',
       year_built: home ? home?.year_built : undefined,
       bathrooms: home ? home?.bathrooms : undefined,
       bedrooms: home ? home?.bedrooms : undefined,
       toilets: home ? home?.toilets : undefined,
-      address: home ? home?.address : "",
-      state: home ? home?.state : "",
-      lga: home ? home?.lga : "",
-      description: home ? home?.description : "",
-      features: home ? home?.features.join(".") : "",
+      address: home ? home?.address : '',
+      state: home ? home?.state : '',
+      lga: home ? home?.lga : '',
+      description: home ? home?.description : '',
+      features: home ? home?.features.join('.') : '',
       files: [],
     },
   });
 
   async function onSubmit(values: z.infer<typeof HomeValidation>) {
-    if (action === "Create" && !values.files.length) {
+    if (action === 'Create' && !values.files.length) {
       return toast({
-        variant: "warning",
-        description: "Please upload an image before submitting.",
+        variant: 'warning',
+        description: 'Please upload an image before submitting.',
       });
     }
 
     //! updating
-    if (home && action === "Update") {
+    if (home && action === 'Update') {
       const updatedHome = await updateHome({
         ...values,
         homeId: home.$id,
@@ -80,8 +80,8 @@ export default function HomeForm({ home, action }: PostFormProps) {
       });
       if (updatedHome) {
         toast({
-          variant: "success",
-          description: "Document updated successfully.",
+          variant: 'success',
+          description: 'Home listing updated successfully.',
         });
         return navigate(`/home/${home.$id}`);
       }
@@ -90,17 +90,18 @@ export default function HomeForm({ home, action }: PostFormProps) {
     //! creating
     if (!user.id) {
       return toast({
-        variant: "warning",
-        description: "Sorry, you do not have access to create a document.",
+        variant: 'warning',
+        description: 'Sorry, you do not have access to create a document.',
       });
     } else {
       const newHome = await createHome({
         ...values,
         userId: user.id,
+        accountId: user.accountId,
       });
 
       if (!newHome) throw Error;
-      navigate("/listings");
+      navigate(`/listings/${user.id}`);
     }
   }
 
@@ -109,31 +110,31 @@ export default function HomeForm({ home, action }: PostFormProps) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="bg-white px-6 max-md:px-4 max-sm:px-2 py-6 shadow rounded-lg">
-          <div className="space-y-6 pb-8">
+          className='bg-white px-6 max-md:px-4 max-sm:px-2 py-6 shadow rounded-lg'>
+          <div className='space-y-6 pb-8'>
             <FormField
               control={form.control}
-              name="title"
+              name='title'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} />
+                    <Input type='text' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-x-2 gap-y-6">
+            <div className='grid grid-cols-3 max-sm:grid-cols-1 gap-x-2 gap-y-6'>
               <FormField
                 control={form.control}
-                name="price"
+                name='price'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Price</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type='number'
                         {...field}
                         onChange={(e) => field.onChange(e.target.valueAsNumber)}
                       />
@@ -144,7 +145,7 @@ export default function HomeForm({ home, action }: PostFormProps) {
               />
               <FormField
                 control={form.control}
-                name="payment_method"
+                name='payment_method'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Payment Method</FormLabel>
@@ -153,12 +154,12 @@ export default function HomeForm({ home, action }: PostFormProps) {
                       defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="select method" />
+                          <SelectValue placeholder='select method' />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="month">Monthly</SelectItem>
-                        <SelectItem value="year">Yearly</SelectItem>
+                        <SelectItem value='month'>Monthly</SelectItem>
+                        <SelectItem value='year'>Yearly</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -167,13 +168,13 @@ export default function HomeForm({ home, action }: PostFormProps) {
               />
               <FormField
                 control={form.control}
-                name="year_built"
+                name='year_built'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Year Built</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type='number'
                         {...field}
                         onChange={(e) => field.onChange(e.target.valueAsNumber)}
                       />
@@ -183,16 +184,16 @@ export default function HomeForm({ home, action }: PostFormProps) {
                 )}
               />
             </div>
-            <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-x-2 gap-y-6">
+            <div className='grid grid-cols-3 max-sm:grid-cols-1 gap-x-2 gap-y-6'>
               <FormField
                 control={form.control}
-                name="bedrooms"
+                name='bedrooms'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>No. of Bedrooms</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type='number'
                         {...field}
                         onChange={(e) => field.onChange(e.target.valueAsNumber)}
                       />
@@ -203,13 +204,13 @@ export default function HomeForm({ home, action }: PostFormProps) {
               />
               <FormField
                 control={form.control}
-                name="bathrooms"
+                name='bathrooms'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>No. of Bathrooms</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type='number'
                         {...field}
                         onChange={(e) => field.onChange(e.target.valueAsNumber)}
                       />
@@ -220,13 +221,13 @@ export default function HomeForm({ home, action }: PostFormProps) {
               />
               <FormField
                 control={form.control}
-                name="toilets"
+                name='toilets'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>No. of Toilets</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type='number'
                         {...field}
                         onChange={(e) => field.onChange(e.target.valueAsNumber)}
                       />
@@ -238,21 +239,21 @@ export default function HomeForm({ home, action }: PostFormProps) {
             </div>
             <FormField
               control={form.control}
-              name="address"
+              name='address'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Address</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} />
+                    <Input type='text' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-x-2 gap-y-6">
+            <div className='grid grid-cols-2 max-sm:grid-cols-1 gap-x-2 gap-y-6'>
               <FormField
                 control={form.control}
-                name="state"
+                name='state'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>State</FormLabel>
@@ -261,12 +262,12 @@ export default function HomeForm({ home, action }: PostFormProps) {
                       defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="select state" />
+                          <SelectValue placeholder='select state' />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="monthly">Per Month</SelectItem>
-                        <SelectItem value="yearly">Per Year</SelectItem>
+                        <SelectItem value='monthly'>Per Month</SelectItem>
+                        <SelectItem value='yearly'>Per Year</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -275,7 +276,7 @@ export default function HomeForm({ home, action }: PostFormProps) {
               />
               <FormField
                 control={form.control}
-                name="lga"
+                name='lga'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>LGA</FormLabel>
@@ -284,12 +285,12 @@ export default function HomeForm({ home, action }: PostFormProps) {
                       defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="select lga" />
+                          <SelectValue placeholder='select lga' />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="monthly">Per Month</SelectItem>
-                        <SelectItem value="yearly">Per Year</SelectItem>
+                        <SelectItem value='monthly'>Per Month</SelectItem>
+                        <SelectItem value='yearly'>Per Year</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -299,7 +300,7 @@ export default function HomeForm({ home, action }: PostFormProps) {
             </div>
             <FormField
               control={form.control}
-              name="files"
+              name='files'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Add Photos</FormLabel>
@@ -309,20 +310,20 @@ export default function HomeForm({ home, action }: PostFormProps) {
                       mediaUrl={home?.imageUrls}
                     />
                   </FormControl>
-                  <FormMessage className="shad-form_message" />
+                  <FormMessage className='shad-form_message' />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="description"
+              name='description'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="maximum of 500 characters"
-                      className="resize-none h-32"
+                      placeholder='maximum of 500 characters'
+                      className='resize-none h-32'
                       {...field}
                     />
                   </FormControl>
@@ -332,14 +333,14 @@ export default function HomeForm({ home, action }: PostFormProps) {
             />
             <FormField
               control={form.control}
-              name="features"
+              name='features'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Features</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Enter features separated by periods (full-stop)"
-                      className="resize-none h-32"
+                      placeholder='Enter features separated by periods (full-stop)'
+                      className='resize-none h-32'
                       {...field}
                     />
                   </FormControl>
@@ -350,12 +351,12 @@ export default function HomeForm({ home, action }: PostFormProps) {
           </div>
           <Button
             disabled={isCreatingHome || isUpdatingHome}
-            type="submit"
-            className="w-full">
+            type='submit'
+            className='w-full'>
             {isCreatingHome || isUpdatingHome ? (
               <>
-                <Loader color="white" size={20} />
-                <span className="pl-1">Please wait...</span>
+                <Loader color='white' size={20} />
+                <span className='pl-1'>Please wait...</span>
               </>
             ) : (
               `${action} Home`

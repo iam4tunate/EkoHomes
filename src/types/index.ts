@@ -15,6 +15,7 @@ export type INavLink = {
 
 export type INewHome = {
   userId: string;
+  accountId: string;
   title: string;
   price: number;
   year_built: number;
@@ -59,6 +60,7 @@ export type IUser = {
   phone_number: string;
   email: string;
   imageUrl: string;
+  label: string;
 };
 
 export type INewUser = {
@@ -67,4 +69,10 @@ export type INewUser = {
   phone_number: string;
   email: string;
   password: string;
+};
+
+export type IUpgradeAgent = {
+  id: string;
+  agency_name?: string;
+  label: string;
 };
