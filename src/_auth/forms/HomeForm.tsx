@@ -27,6 +27,7 @@ import { Loader } from '@/components/shared';
 import FileUploader from '@/components/shared/FileUploader';
 import { Models } from 'appwrite';
 import { useToast } from '@/components/ui/use-toast';
+import { LGAs } from '@/lib/constants';
 
 type PostFormProps = {
   home?: Models.Document;
@@ -54,7 +55,7 @@ export default function HomeForm({ home, action }: PostFormProps) {
       bedrooms: home ? home?.bedrooms : undefined,
       toilets: home ? home?.toilets : undefined,
       address: home ? home?.address : '',
-      state: home ? home?.state : '',
+      state: 'Lagos',
       lga: home ? home?.lga : '',
       description: home ? home?.description : '',
       features: home ? home?.features.join('.') : '',
@@ -154,7 +155,7 @@ export default function HomeForm({ home, action }: PostFormProps) {
                       defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder='select method' />
+                          <SelectValue placeholder='select preferred method' />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -257,19 +258,9 @@ export default function HomeForm({ home, action }: PostFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>State</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder='select state' />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value='monthly'>Per Month</SelectItem>
-                        <SelectItem value='yearly'>Per Year</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <FormControl>
+                      <Input disabled type='text' {...field} />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -289,8 +280,11 @@ export default function HomeForm({ home, action }: PostFormProps) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value='monthly'>Per Month</SelectItem>
-                        <SelectItem value='yearly'>Per Year</SelectItem>
+                        {LGAs.map((lga) => (
+                          <SelectItem key={lga.id} value={lga.name}>
+                            {lga.name}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />

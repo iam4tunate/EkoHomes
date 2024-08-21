@@ -70,7 +70,7 @@ export async function logoutUser() {
 
 export async function createHome(home: INewHome) {
   const uploadedFiles: UploadedFile[] = [];
-  console.log(home);
+
   try {
     for (const file of home.files) {
       const uploadedFile = await uploadFile(file);
@@ -86,9 +86,7 @@ export async function createHome(home: INewHome) {
       return previewUrl;
     });
 
-    const fileIds = uploadedFiles.map((uploadedFile) => {
-      return uploadedFile.$id;
-    });
+    const fileIds = uploadedFiles.map((uploadedFile) => uploadedFile.$id);
 
     const features =
       home.features?.split(/\.\s*/).filter((str) => str !== '') || [];
@@ -156,11 +154,43 @@ export async function deleteFile(fileId: string) {
   return { status: 'ok' };
 }
 
-export async function getRecentHomes() {
+export async function getHomes() {
+  const homes = await databases.listDocuments(
+    appwriteConfig.databaseId,
+    appwriteConfig.homesCollectionId
+    // [Query.orderDesc('$createdAt'), Query.limit(20)]
+  );
+  return homes;
+}
+
+export async function getFeaturedHomes() {
   const homes = await databases.listDocuments(
     appwriteConfig.databaseId,
     appwriteConfig.homesCollectionId,
-    [Query.orderDesc('$createdAt'), Query.limit(20)]
+    [Query.orderDesc('$createdAt'), Query.limit(10)]
+  );
+  return homes;
+}
+
+export async function filterHomes(filterValues: {
+  searchTerm: string;
+  state: string;
+  lga: string;
+  priceRange: string;
+}) {
+  const { searchTerm, state, lga, priceRange } = filterValues;
+
+  const queries = [
+    searchTerm && Query.search('title', searchTerm),
+    state && Query.equal('state', state),
+    lga && Query.equal('lga', lga),
+    priceRange && Query.lessThan('price', Number(priceRange)),
+  ].filter(Boolean);
+
+  const homes = await databases.listDocuments(
+    appwriteConfig.databaseId,
+    appwriteConfig.homesCollectionId,
+    queries
   );
   return homes;
 }

@@ -48,8 +48,7 @@ export default function Apply() {
     onSuccess: () => {
       toast({
         variant: 'success',
-        description:
-          "Congratulations! You've successfully been promoted to agent status.",
+        description: 'Payment Successful',
       });
 
       const data = {
@@ -73,9 +72,9 @@ export default function Apply() {
   }, [navigate, isSuccess]);
 
   return (
-    <div className='grid grid-cols-2 gap-x-12 max,-lg:grid-cols-1 min-h-[calc(100vh-80px)] max-md:max-h-fit'>
+    <div className='grid grid-cols-2 gap-x-12 max-lg:grid-cols-1 min-h-[calc(100vh-80px)] max-md:max-h-fit'>
       <div className='padX padY sm:max-w-3xl w-full'>
-        <h3>Become an Agent on EkoHomes</h3>
+        <h3>Become an Agent on Ekohomes</h3>
         <p className='pt-2 pb-5'>
           As an agent on our real estate platform, you unlock exclusive features
           designed to help you manage your listings with ease:

@@ -14,7 +14,7 @@ export default function SectionHeading({
     <div
       className={`${
         icon === "white" && "text-white"
-      } w-[50%] max-lg:w-[70%] max-sm:w-full pb-8 max-sm:pb-4`}>
+      } w-[60%] max-lg:w-[80%] max-sm:w-full pb-8 max-sm:pb-4`}>
       <img
         src={icon === "white" ? starsWhite : starsGreen}
         alt="stars"

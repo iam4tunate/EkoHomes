@@ -17,22 +17,24 @@ export const LoginValidation = z.object({
 });
 
 export const HomeValidation = z.object({
-  title: z.string().min(5),
-  // price: z.number().nonnegative("only positive value allowed"),
-  price: z.number(),
-  year_built: z.number(),
-  payment_method: z.string(),
-  bathrooms: z.number(),
-  bedrooms: z.number(),
-  toilets: z.number(),
-  address: z.string().min(5).max(100, { message: 'maximum of 100 characters' }),
+  title: z.string().min(1, 'Field cannot be empty'),
+  price: z.number().min(1, 'Field cannot be empty'),
+  year_built: z.number().min(4, 'minimum of 4 characters'),
+  payment_method: z.string().min(1, 'Field cannot be empty'),
+  bathrooms: z.number().min(1, 'Field cannot be empty'),
+  bedrooms: z.number().min(1, 'Field cannot be empty'),
+  toilets: z.number().min(1, 'Field cannot be empty'),
+  address: z
+    .string()
+    .min(12)
+    .max(100, { message: 'maximum of 100 characters' }),
   state: z.string(),
-  lga: z.string(),
+  lga: z.string().nonempty('Select a LGA'),
   description: z
     .string()
     .min(130, { message: 'minimum of 130 characters' })
     .max(250, { message: 'maximum of 250 characters' }),
-  features: z.string().nonempty('Features are required'),
+  features: z.string().min(1, 'Field cannot be empty'),
   files: z.custom<File[]>(),
   //!issue with this is that you have to upload a new file when you want to upload
   // files: z.array(z.instanceof(File)).min(1, "At least one file is required"),

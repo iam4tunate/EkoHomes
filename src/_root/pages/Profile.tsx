@@ -9,7 +9,6 @@ export default function Profile() {
   const { isAuthenticated } = useUserContext();
   const from = location.state?.from?.pathname || -1;
   const { user } = useUserContext();
-  console.log(user);
 
   useEffect(() => {
     if (!isAuthenticated) {

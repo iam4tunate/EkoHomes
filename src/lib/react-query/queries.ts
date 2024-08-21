@@ -3,10 +3,12 @@ import {
   createHome,
   createUser,
   deleteHome,
+  filterHomes,
   getCurrentUser,
+  getFeaturedHomes,
   getHomeById,
+  getHomes,
   getHomesByCreatorId,
-  getRecentHomes,
   getUserById,
   loginUser,
   logoutUser,
@@ -71,7 +73,6 @@ export const useCreateHome = () => {
   return useMutation({
     mutationFn: (home: INewHome) => createHome(home),
     onSuccess: (data) => {
-      console.log('first', data);
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_HOMES],
       });
@@ -92,10 +93,31 @@ export const useCreateHome = () => {
   });
 };
 
-export const useGetRecentHomes = () => {
+export const useGetHomes = () => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_RECENT_HOMES],
-    queryFn: getRecentHomes,
+    queryKey: [QUERY_KEYS.GET_HOMES],
+    queryFn: getHomes,
+  });
+};
+
+export const useGetFeaturedHomes = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_FEATURED_HOMES],
+    queryFn: getFeaturedHomes,
+  });
+};
+
+export const useFilterHomes = (filterValues: {
+  searchTerm: string;
+  state: string;
+  lga: string;
+  priceRange: string;
+}) => {
+  const { searchTerm, state, lga, priceRange } = filterValues;
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_FILTERED_HOMES, filterValues],
+    queryFn: () => filterHomes(filterValues),
+    enabled: !!searchTerm || !!state || !!lga || !!priceRange,
   });
 };
 
@@ -145,7 +167,10 @@ export const useDeleteHome = () => {
     }) => deleteHome(homeId ?? '', imageIds),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_RECENT_HOMES],
+        queryKey: [QUERY_KEYS.GET_HOMES],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_FEATURED_HOMES],
       });
       toast({
         variant: 'success',
@@ -170,15 +195,13 @@ export const useGetUserById = (id: string) => {
 };
 
 export const useUpgradeToAgent = () => {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (user: IUpgradeAgent) => upgradeToAgent(user),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_CURRENT_USER],
-      });
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_USER_BY_ID, data.$id],
+    onSuccess: () => {
+      toast({
+        variant: 'success',
+        description:
+          "Congratulations! You've successfully been upgraded to agent status.",
       });
     },
     onError: (error) => {

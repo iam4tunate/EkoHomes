@@ -7,13 +7,7 @@ import { useDeleteHome, useGetHomeById } from '@/lib/react-query/queries';
 import { GalleryThumb, Loader } from '@/components/shared';
 import { formatNumberWithCommas } from '@/lib/utils';
 import { useUserContext } from '@/context/AuthContext';
-import {
-  Bath,
-  Bed,
-  Send,
-  MapPin,
-  ShowerHead,
-} from 'lucide-react';
+import { Bath, Bed, Send, MapPin, ShowerHead } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -30,17 +24,17 @@ import ToggleDisplayLength from '@/components/shared/ToggleDisplayLength';
 
 export default function HomeDetails() {
   const { id } = useParams();
-  const { user } = useUserContext();
-  const navigate = useNavigate();
   const { toast } = useToast();
+  const { user, isAuthenticated } = useUserContext();
+  const navigate = useNavigate();
+
   const { data: home, isPending: isLoadingHome } = useGetHomeById(id || '');
-  console.log(home?.creator.$id, user.id);
   const {
     mutateAsync: deleteHome,
     isSuccess: homeDeleted,
     isPending: isDeleting,
   } = useDeleteHome();
-
+console.log(home)
   const handleClick = () => {
     if (home?.creator.$id !== user.id) {
       return toast({
@@ -109,7 +103,7 @@ export default function HomeDetails() {
               <div className='font-geist500 pb-1'>Features & Amenities</div>
               <ToggleDisplayLength items={home?.features} maxItems={3} />
             </div>
-            {user.id !== home?.creator.$id ? (
+            {user.id !== home?.creator.$id && (
               <div className='shadow bg-destructive-foreground py-6 px-4 rounded-lg mt-6 mb-12'>
                 <div className='flex items-center gap-x-4'>
                   <img
@@ -131,7 +125,8 @@ export default function HomeDetails() {
                   </div>
                 </div>
               </div>
-            ) : (
+            )}
+            {isAuthenticated && user.id === home?.creator.$id && (
               <div className='shadow bg-destructive-foreground py-6 px-4 rounded-lg mt-6 mb-12'>
                 <div className='flex items-center gap-x-4'>
                   <div className=''>
@@ -139,7 +134,7 @@ export default function HomeDetails() {
                     <p className='text-sm pb-2.5 pt-1.5'>
                       This home listing was uploaded by you.
                     </p>
-                    <div className='flex items-center text-sm font-geist600 gap-x-5'>
+                    <div className='flex items-center text-sm font-geist500 gap-x-5'>
                       <Link
                         to={`/update/${home?.$id}`}
                         className={`${

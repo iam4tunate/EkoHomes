@@ -27,7 +27,7 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const { user, isAuthenticated, isLoading: isUserLoading } = useUserContext();
   const { mutate: logout, isSuccess } = useLogoutUuser();
-  console.log('user', user);
+
   useEffect(() => {
     if (isSuccess) navigate(0);
   }, [navigate, isSuccess]);
@@ -37,20 +37,20 @@ export default function Navbar() {
   return (
     <div className='flex items-center justify-between container padX h-20 border-b'>
       <Logo />
-      {/* <ul className="max-md:hidden ml-auto flex items-center gap-x-12 text-sm pr-8">
+      <ul className='max-md:hidden ml-auto flex items-center gap-x-12 text-sm font-geist500 pr-8'>
         <li>
-          <Link to="/">Home</Link>
+          <Link to='/'>Home</Link>
         </li>
         <li>
-          <Link to="/about">About us</Link>
+          <Link to='/about'>About us</Link>
         </li>
         <li>
-          <Link to="/services">Services</Link>
+          <Link to='/services'>Services</Link>
         </li>
         <li>
-          <Link to="/explore">Explore</Link>
+          <Link to='/explore'>Explore</Link>
         </li>
-      </ul> */}
+      </ul>
       <div className='flex items-center gap-x-2'>
         <Sheet>
           <SheetTrigger asChild>
@@ -202,7 +202,7 @@ export default function Navbar() {
         ) : null}
 
         {user.id && user.label !== 'agent' && user.label !== 'admin' && (
-          <Link to='/apply' className='max-md:hidden'>
+          <Link to='/apply' className='max-sm:hidden'>
             <Button>Become an Agent</Button>
           </Link>
         )}

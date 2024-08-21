@@ -24,13 +24,10 @@ export default function App() {
       <ScrollToTop>
         <Routes>
           <Route element={<RootLayout />}>
-            <Route path='/create' element={<CreateHome />} />
-
             {/* private routes  */}
             <Route element={<PrivateRoutes />}>
               <Route path='/update/:id' element={<UpdateHome />} />
               <Route path='/apply' element={<Apply />} />
-              <Route path='/listings/:id' element={<Listings />} />
               <Route path='/profile' element={<Profile />} />
             </Route>
 
@@ -42,6 +39,8 @@ export default function App() {
             <Route path='/about' element={<About />} />
             <Route path='/explore' element={<Explore />} />
             <Route path='/services' element={<Services />} />
+            <Route path='/create' element={<CreateHome />} />
+            <Route path='/listings/:id' element={<Listings />} />
           </Route>
         </Routes>
       </ScrollToTop>

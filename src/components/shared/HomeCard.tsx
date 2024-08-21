@@ -20,8 +20,8 @@ export default function HomeCard({ home }: { home: Models.Document }) {
         alt="property"
         className="rounded-lg w-full cursor-pointer hover:scale-105 animate-in duration-200 h-[300px] object-cover"
       />
-      <div className="pt-4 font-geist600">{home.title}</div>
-      <p className="text-sm leading-tight pt-2 pb-3">
+      <div className="pt-4 font-geist600 truncate ...">{home.title}</div>
+      <p className="text-sm leading-tight pt-2 pb-3 font-geist400">
         {shortenText(home.description, 130)}
       </p>
       <div className="flex flex-wrap gap-y-2 items-center gap-x-4">

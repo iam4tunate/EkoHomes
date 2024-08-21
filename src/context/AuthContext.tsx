@@ -46,7 +46,6 @@ export default function AuthProvider({
     setIsLoading(true);
     try {
       const currentAccount = await getCurrentUser();
-      console.log('curr', currentAccount);
       if (currentAccount) {
         setUser({
           id: currentAccount.$id,
