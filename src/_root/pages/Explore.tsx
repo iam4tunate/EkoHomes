@@ -1,7 +1,5 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -9,8 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { MapPin, Search, Send, Wallet } from 'lucide-react';
-import { HomeCard, Loader, SectionHeading } from '@/components/shared';
+import { MapPin, Search, Wallet } from 'lucide-react';
+import { HomeCard, Loader } from '@/components/shared';
 import { useFilterHomes } from '@/lib/react-query/queries';
 import { Models } from 'appwrite';
 import { LGAs } from '@/lib/constants';
@@ -127,7 +125,7 @@ export default function Explore() {
         </div>
       </div>
 
-      <div className='pt-14 container padX'>
+      {/* <div className='pt-14 container padX'>
         <SectionHeading
           icon='green'
           title="Didn't find what you're looking for yet?"
@@ -245,7 +243,7 @@ export default function Explore() {
             </Button>
           </form>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

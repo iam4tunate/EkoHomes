@@ -1,10 +1,11 @@
 import { useUserContext } from '@/context/AuthContext';
 import { agentBenefits } from '@/lib/constants';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PaystackButton } from 'react-paystack';
+// import { PaystackButton } from 'react-paystack';
 import { useToast } from '@/components/ui/use-toast';
 import { useLogoutUuser, useUpgradeToAgent } from '@/lib/react-query/queries';
 import { useEffect } from 'react';
+import PaystackPop from '@paystack/inline-js';
 
 export default function Apply() {
   const navigate = useNavigate();
@@ -23,49 +24,80 @@ export default function Apply() {
   }, [navigate, user, from, isAuthenticated]);
 
   const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
-  const name = `${user.first_name} ${user.last_name}`;
-  const amount = 1200000;
+  // const name = `${user.first_name} ${user.last_name}`;
+  const amount = 12000;
 
-  const componentProps = {
-    email: user.email,
-    amount,
-    metadata: {
-      custom_fields: [
-        {
-          display_name: 'Name',
-          variable_name: 'name',
-          value: name,
-        },
-        {
-          display_name: 'Phone Number',
-          variable_name: 'phone_number',
-          value: user.phone_number,
-        },
-      ],
-    },
-    publicKey,
-    text: 'Apply Now',
-    onSuccess: () => {
-      toast({
-        variant: 'success',
-        description: 'Payment Successful',
-      });
+  // const componentProps = {
+  //   email: user.email,
+  //   amount,
+  //   metadata: {
+  //     custom_fields: [
+  //       {
+  //         display_name: 'Name',
+  //         variable_name: 'name',
+  //         value: name,
+  //       },
+  //       {
+  //         display_name: 'Phone Number',
+  //         variable_name: 'phone_number',
+  //         value: user.phone_number,
+  //       },
+  //     ],
+  //   },
+  //   publicKey,
+  //   text: 'Apply Now',
+  //   onSuccess: () => {
+  //     toast({
+  //       variant: 'success',
+  //       description: 'Payment Successful',
+  //     });
 
-      const data = {
-        id: user.id,
-        label: 'agent',
-      };
-      upgrade(data);
-      logout();
-    },
-    onClose: () => {
-      toast({
-        variant: 'destructive',
-        description:
-          'We encountered an issue while attempting to upgrade your account. Please try again',
-      });
-    },
-  };
+  //     const data = {
+  //       id: user.id,
+  //       label: 'agent',
+  //     };
+  //     upgrade(data);
+  //     logout();
+  //   },
+  //   onClose: () => {
+  //     toast({
+  //       variant: 'destructive',
+  //       description:
+  //         'We encountered an issue while attempting to upgrade your account. Please try again',
+  //     });
+  //   },
+  // };
+  function payWithPaystack(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    const paystack = new PaystackPop();
+    paystack.newTransaction({
+      key: publicKey,
+      amount: amount * 100,
+      email: user.email,
+      firstname: user.first_name,
+      lastname: user.last_name,
+      onSuccess: () => {
+        toast({
+          variant: 'success',
+          description: 'Payment Successful',
+        });
+
+        const data = {
+          id: user.id,
+          label: 'agent',
+        };
+        upgrade(data);
+        logout();
+      },
+      onClose: () => {
+        toast({
+          variant: 'destructive',
+          description:
+            'We encountered an issue while attempting to upgrade your account. Please try again',
+        });
+      },
+    });
+  }
 
   useEffect(() => {
     if (isSuccess) navigate(0);
@@ -95,10 +127,13 @@ export default function Apply() {
             Join our community of agents today and take full control of your
             real estate portfolio!
           </p>
-          <PaystackButton
+          <button className='' onClick={payWithPaystack}>
+            Apply
+          </button>
+          {/* <PaystackButton
             className='bg-primary py-2.5 px-4 rounded-md text-white text-sm'
             {...componentProps}
-          />
+          /> */}
           <p className='text-red-500 italic pt-4'>
             Note: <span className='font-geist600'>Paystack Test Mode</span> is
             being used so you don't need to use you credit card and your money

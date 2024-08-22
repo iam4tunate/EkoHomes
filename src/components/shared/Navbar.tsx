@@ -37,7 +37,7 @@ export default function Navbar() {
   return (
     <div className='flex items-center justify-between container padX h-20 border-b'>
       <Logo />
-      <ul className='max-md:hidden ml-auto flex items-center gap-x-12 text-sm font-geist500 pr-8'>
+      <ul className='max-lg:hidden ml-auto flex items-center gap-x-12 text-sm font-geist500 pr-8'>
         <li>
           <Link to='/'>Home</Link>
         </li>

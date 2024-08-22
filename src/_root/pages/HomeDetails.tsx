@@ -1,13 +1,9 @@
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDeleteHome, useGetHomeById } from '@/lib/react-query/queries';
 import { GalleryThumb, Loader } from '@/components/shared';
 import { formatNumberWithCommas } from '@/lib/utils';
 import { useUserContext } from '@/context/AuthContext';
-import { Bath, Bed, Send, MapPin, ShowerHead } from 'lucide-react';
+import { Bath, Bed, MapPin, ShowerHead } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -187,7 +183,7 @@ console.log(home)
         </div>
       )}
 
-      <div className='pt-14 grid grid-cols-[40%_60%] gap-x-12 gap-y-8 max-lg:grid-cols-1'>
+      {/* <div className='pt-14 grid grid-cols-[40%_60%] gap-x-12 gap-y-8 max-lg:grid-cols-1'>
         <div className='max-lg:w-[70%] max-sm:w-full'>
           <img
             src='/images/stars-green.svg'
@@ -202,7 +198,6 @@ console.log(home)
           </p>
         </div>
         <div className='border-primary bg-accent rounded-xl px-12 max-md:px-8 max-sm:px-4 py-8'>
-          {/*//! default values will be inputed in almost all fields */}
           <form
             action=''
             className='grid grid-cols-2 max-sm:grid-cols-1 gap-y-6 gap-x-4'>
@@ -240,7 +235,7 @@ console.log(home)
             </Button>
           </form>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

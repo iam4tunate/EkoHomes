@@ -32,7 +32,7 @@ export default function Home() {
             <div className='text-6xl max-md:text-5xl max-sm:text-4xl font-geist700 max-md:font-geist700 uppercase leading-none tracking-tighter'>
               Find Your Perfect Home Today.
             </div>
-            <p className='pt-5 pb-6 w-[70%] max-sm:w-full mx-auto leading-snug'>
+            <p className='pt-5 pb-6 w-[70%] max-sm:w-full mx-auto leading-tight\'>
               Your journey to finding the perfect home starts here. Explore our
               listings to discover a home that matches your dreams
             </p>
