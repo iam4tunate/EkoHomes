@@ -20,7 +20,7 @@ export default function CreateHome() {
             <Link
               to='/apply'
               className='w-fit after:w-full after:h-[1px] after:bg-primary after:block block text-primary pt-1 font-geist500'>
-              Apply to Become an Agent
+              Apply Now to Become an Agent
             </Link>
           </p>
         </div>

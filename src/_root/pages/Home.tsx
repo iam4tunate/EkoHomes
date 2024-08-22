@@ -28,7 +28,7 @@ export default function Home() {
     <div>
       <div className=''>
         <div className='padX pt-16 flex flex-col items-center'>
-          <div className='text-center w-[50%] max-lg:w-[70%] max-sm:w-full pb-12'>
+          <div className='text-center w-[50%] max-xl:w-[60%] max-lg:w-[70%] max-sm:w-full pb-12'>
             <div className='text-6xl max-md:text-5xl max-sm:text-4xl font-geist700 max-md:font-geist700 uppercase leading-none tracking-tighter'>
               Find Your Perfect Home Today.
             </div>
@@ -40,6 +40,11 @@ export default function Home() {
               <Link to='/explore'>
                 <Button size='lg' className='w-full'>
                   Explore Homes
+                </Button>
+              </Link>
+              <Link to='/apply' className='sm:hidden'>
+                <Button size='lg' variant='outline' className='w-full'>
+                  Become An Agent
                 </Button>
               </Link>
             </div>
@@ -208,7 +213,9 @@ export default function Home() {
             className='border rounded-lg px-4'>
             {faqs.map((faq) => (
               <AccordionItem key={faq.id} value={`item-${faq.id}`}>
-                <AccordionTrigger>{faq.question}</AccordionTrigger>
+                <AccordionTrigger className='text-left'>
+                  {faq.question}
+                </AccordionTrigger>
                 <AccordionContent>{faq.answer}</AccordionContent>
               </AccordionItem>
             ))}

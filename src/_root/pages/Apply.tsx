@@ -72,7 +72,7 @@ export default function Apply() {
         <ul className='space-y-6'>
           {agentBenefits.map((benefit, index) => (
             <li key={index} className='grid grid-cols-[8px_1fr] gap-x-2'>
-              <div className='w-2 h-2 bg-primary rounded-full mt-1'></div>
+              <div className='w-2 h-2 bg-primary rounded-full mt-1.5'></div>
               <span>
                 <span className='font-geist600 pr-1'>{benefit.title}:</span>
                 {benefit.text}
@@ -87,9 +87,9 @@ export default function Apply() {
           </p>
           <Button onClick={payWithPaystack}>Apply Now</Button>
           <p className='text-red-500 italic pt-4'>
-            Note: <span className='font-geist600'>Paystack Test Mode</span> is
-            being used so you don't need to use you credit card and your money
-            woun't be deducted
+            Note: Paystack is currently in Test Mode, so there's no need to use
+            your actual credit card. No real transactions will occur, and your
+            money won't be deducted.
           </p>
         </div>
       </div>

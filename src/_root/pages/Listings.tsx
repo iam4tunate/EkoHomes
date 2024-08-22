@@ -7,24 +7,43 @@ import {
 } from '@/lib/react-query/queries';
 import { Models } from 'appwrite';
 import { HousePlus } from 'lucide-react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function Listings() {
   const { id } = useParams();
   const { user } = useUserContext();
-  const navigate = useNavigate();
 
   const { data: homes, isPending: isLoadingHomes } = useGetHomesByCreatorId(
     id || ''
   );
   const { data: agent, isPending: isLoadingAgent } = useGetUserById(id || '');
   const isAgent = id === user.id;
-  console.log('hi', id);
-  if (id === '') navigate('/login');
+
+  if (!user.id || user.label === 'client') {
+    return (
+      <div className='max-w-screen-md mx-auto padY padX '>
+        {!user.id && (
+          <p className='text-sm italic text-destructive pb-1'>
+            No user found. Please log in to continue.
+          </p>
+        )}
+        <div className='bg-red-100 rounded-md py-4 px-4'>
+          <p>
+            Only agents are allowed to create & view their listings. Interested?{' '}
+            <Link
+              to='/apply'
+              className='w-fit after:w-full after:h-[1px] after:bg-primary after:block block text-primary pt-1 font-geist500'>
+              Apply now to become an agent!
+            </Link>
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='container padX padY'>
-      <div className='flex items-center justify-between'>
+      <div className='flex flex-wrap gap-x-6 gap-y-2 items-center justify-between'>
         <div className='flex items-center gap-x-2 text-primary'>
           <h4 className='inline'>
             All Listings by{' '}
