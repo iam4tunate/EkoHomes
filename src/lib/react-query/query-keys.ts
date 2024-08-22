@@ -6,8 +6,9 @@ export enum QUERY_KEYS {
   GET_CURRENT_USER = 'getCurrentUser',
   GET_USER_BY_ID = 'getUserById',
   // GET_USERS = "getUsers",
-  
+
   GET_FILTERED_HOMES = 'getFilteredHomes',
+  GET_SAVED_HOMES = 'getSavedHomes',
 
   // HOME KEYS
   GET_HOMES = 'getHomes',

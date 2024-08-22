@@ -38,9 +38,10 @@ export default function Home() {
             </p>
             <div className='flex justify-center gap-x-8 gap-y-3 max-sm:flex-col'>
               <Link to='/explore'>
-                <Button className='w-full'>Explore Homes</Button>
+                <Button size='lg' className='w-full'>
+                  Explore Homes
+                </Button>
               </Link>
-              <Button variant='outline'>Contact us</Button>
             </div>
           </div>
         </div>

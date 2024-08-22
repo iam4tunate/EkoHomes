@@ -3,7 +3,7 @@ import { useDeleteHome, useGetHomeById } from '@/lib/react-query/queries';
 import { GalleryThumb, Loader } from '@/components/shared';
 import { formatNumberWithCommas } from '@/lib/utils';
 import { useUserContext } from '@/context/AuthContext';
-import { Bath, Bed, MapPin, ShowerHead } from 'lucide-react';
+import { Bath, Bed, Mail, MapPin, Phone, ShowerHead } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { useToast } from '@/components/ui/use-toast';
 import ToggleDisplayLength from '@/components/shared/ToggleDisplayLength';
+import { Button } from '@/components/ui/button';
 
 export default function HomeDetails() {
   const { id } = useParams();
@@ -30,7 +31,7 @@ export default function HomeDetails() {
     isSuccess: homeDeleted,
     isPending: isDeleting,
   } = useDeleteHome();
-console.log(home)
+  console.log(home);
   const handleClick = () => {
     if (home?.creator.$id !== user.id) {
       return toast({
@@ -46,7 +47,7 @@ console.log(home)
   return (
     <div className='container padY padX'>
       {isLoadingHome ? (
-        <div className='mt-16 flex items-center justify-center'>
+        <div className='my-16 flex items-center justify-center'>
           <Loader color='green' size={50} />
         </div>
       ) : (
@@ -68,30 +69,30 @@ console.log(home)
                   {home?.address}, {home?.lga}, {home?.state}
                 </span>
               </p>
-              <p className='w-[90%] max-lg:w-full text-[15px] leading-snug'>
+              <p className='w-[90%] max-lg:w-full text-sm font-geist500 leading-snug'>
                 {home?.description}
               </p>
               <div className='flex flex-wrap items-center gap-x-3 gap-y-4 pt-5'>
-                <div className='border rounded-lg py-2 px-4'>
+                <div className='border rounded-lg py-2 px-4 font-geist500'>
                   <div className='flex items-end gap-x-1 pb-1'>
-                    <Bed className='text-primary w-5 h-5' />
+                    <Bed className='text-primary w-5 h-5 max-sm:hidden' />
                     <span className='text-[13px]'>Bedrooms</span>
                   </div>
-                  <span className='font-geist500'>{home?.bedrooms}</span>
+                  <span>{home?.bedrooms}</span>
                 </div>
-                <div className='border rounded-lg py-2 px-4'>
+                <div className='border rounded-lg py-2 px-4 font-geist500'>
                   <div className='flex items-end gap-x-1 pb-1'>
-                    <ShowerHead className='text-primary w-5 h-5' />
+                    <ShowerHead className='text-primary w-5 h-5 max-sm:hidden' />
                     <span className='text-[13px]'>Bathrooms</span>
                   </div>
-                  <span className='font-geist500'>{home?.bathrooms}</span>
+                  <span>{home?.bathrooms}</span>
                 </div>
-                <div className='border rounded-lg py-2 px-4'>
+                <div className='border rounded-lg py-2 px-4 font-geist500'>
                   <div className='flex items-end gap-x-1 pb-1'>
-                    <Bath className='text-primary w-5 h-5' />
+                    <Bath className='text-primary w-5 h-5 max-sm:hidden' />
                     <span className='text-[13px]'>Toilets</span>
                   </div>
-                  <span className='font-geist500'>{home?.toilets}</span>
+                  <span>{home?.toilets}</span>
                 </div>
               </div>
             </div>
@@ -105,7 +106,7 @@ console.log(home)
                   <img
                     src={home?.creator.imageUrl}
                     alt='agent'
-                    className='w-16 h-16 rounded-full'
+                    className='w-16 h-16 rounded-full max-sm:hidden'
                   />
                   <div className=''>
                     <p className='text-xs pb-1'>Uploaded by</p>
@@ -113,11 +114,39 @@ console.log(home)
                       {home?.creator.first_name} {home?.creator.last_name}
                     </div>
                     <p className='text-sm'>
-                      View more listings from this{' '}
+                      View all listings from this{' '}
                       <Link to={`/listings/${home?.creator.$id}`}>
                         <span className='text-primary underline'>agent</span>
                       </Link>
                     </p>
+                  </div>
+                </div>
+                <div className='pt-4'>
+                  <p className='font-geist500 pb-1 text-[15px]'>
+                    Contact Agent:
+                  </p>
+                  <div className='flex items-center flex-wrap gap-y-3 gap-x-3'>
+                    <Button
+                      onClick={() =>
+                        (window.location.href = `tel:${home?.creator.phone_number}`)
+                      }
+                      className='font-medium flex items-center gap-x-1'>
+                      <Phone fill='white' color='white' size={15} />
+                      {home?.creator.phone_number}
+                    </Button>
+                    <Button
+                      className='font-medium flex items-center gap-x-1.5 bg-blue-400 max-[270px]:text-xs'
+                      onClick={() =>
+                        (window.location.href = `mailto:${home?.creator.email}?subject=Inquiry About ${home?.title} Listing from Ekohomes&body=Dear%20${home?.creator.first_name},%0D%0A%0D%0AI hope this message finds you well. I am interested in the ${home?.title} listed on your Ekohomes. I would appreciate more details regarding the property.%0D%0A%0D%0AAdditionally, I would like to schedule a viewing at your earliest convenience. Please let me know the suitable time slots available.
+                        %0D%0A%0D%0ABest%20regards,
+                        %0D%0AYour Name,
+                        %0D%0AYour Phone Number
+                        %0D%0AYour Email address
+                        `)
+                      }>
+                      <Mail size={17} className='max-[270px]:hidden' />
+                      {home?.creator.email}
+                    </Button>
                   </div>
                 </div>
               </div>

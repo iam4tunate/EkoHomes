@@ -13,6 +13,7 @@ import { useFilterHomes } from '@/lib/react-query/queries';
 import { Models } from 'appwrite';
 import { LGAs } from '@/lib/constants';
 import { useState } from 'react';
+import NoSearchResult from '@/components/NoSearchResult';
 
 export default function Explore() {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -27,10 +28,10 @@ export default function Explore() {
     lga,
     priceRange,
   });
-
+  console.log(homes);
   return (
-    <div className='py-14'>
-      <div className='bg-accent pb-14'>
+    <div className='pt-14'>
+      <div className='bg-accent pb-24'>
         <div className='container padX'>
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -99,7 +100,6 @@ export default function Explore() {
                   </div>
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value='500000'>Less than 500 thousand</SelectItem>
                   <SelectItem value='1000000'>Less than 1 million</SelectItem>
                   <SelectItem value='10000000'>Less than 10 million</SelectItem>
                   <SelectItem value='20000000'>Less than 20 million</SelectItem>
@@ -115,6 +115,8 @@ export default function Explore() {
             <div className='mt-16 flex items-center justify-center'>
               <Loader color='green' size={50} />
             </div>
+          ) : !isLoading && homes?.total === 0 ? (
+            <NoSearchResult setPriceRange={setPriceRange} setLga={setLga} setSearchTerm={setSearchTerm} setSearchValue={setSearchValue}/>
           ) : (
             <div className='grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-x-6 gap-y-8 pt-12'>
               {homes?.documents.map((home: Models.Document) => (

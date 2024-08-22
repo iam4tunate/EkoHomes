@@ -1,11 +1,11 @@
 import { useUserContext } from '@/context/AuthContext';
 import { agentBenefits } from '@/lib/constants';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import { PaystackButton } from 'react-paystack';
 import { useToast } from '@/components/ui/use-toast';
 import { useLogoutUuser, useUpgradeToAgent } from '@/lib/react-query/queries';
 import { useEffect } from 'react';
 import PaystackPop from '@paystack/inline-js';
+import { Button } from '@/components/ui/button';
 
 export default function Apply() {
   const navigate = useNavigate();
@@ -24,49 +24,7 @@ export default function Apply() {
   }, [navigate, user, from, isAuthenticated]);
 
   const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
-  // const name = `${user.first_name} ${user.last_name}`;
   const amount = 12000;
-
-  // const componentProps = {
-  //   email: user.email,
-  //   amount,
-  //   metadata: {
-  //     custom_fields: [
-  //       {
-  //         display_name: 'Name',
-  //         variable_name: 'name',
-  //         value: name,
-  //       },
-  //       {
-  //         display_name: 'Phone Number',
-  //         variable_name: 'phone_number',
-  //         value: user.phone_number,
-  //       },
-  //     ],
-  //   },
-  //   publicKey,
-  //   text: 'Apply Now',
-  //   onSuccess: () => {
-  //     toast({
-  //       variant: 'success',
-  //       description: 'Payment Successful',
-  //     });
-
-  //     const data = {
-  //       id: user.id,
-  //       label: 'agent',
-  //     };
-  //     upgrade(data);
-  //     logout();
-  //   },
-  //   onClose: () => {
-  //     toast({
-  //       variant: 'destructive',
-  //       description:
-  //         'We encountered an issue while attempting to upgrade your account. Please try again',
-  //     });
-  //   },
-  // };
   function payWithPaystack(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     const paystack = new PaystackPop();
@@ -127,13 +85,7 @@ export default function Apply() {
             Join our community of agents today and take full control of your
             real estate portfolio!
           </p>
-          <button className='' onClick={payWithPaystack}>
-            Apply
-          </button>
-          {/* <PaystackButton
-            className='bg-primary py-2.5 px-4 rounded-md text-white text-sm'
-            {...componentProps}
-          /> */}
+          <Button onClick={payWithPaystack}>Apply Now</Button>
           <p className='text-red-500 italic pt-4'>
             Note: <span className='font-geist600'>Paystack Test Mode</span> is
             being used so you don't need to use you credit card and your money

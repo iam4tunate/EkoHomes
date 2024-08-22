@@ -115,77 +115,87 @@ export default function Navbar() {
                 </NavLink>
               </SheetClose>
             </ul>
-            <div className='pb-1 font-geist600 px-4 text-sm pt-8'>Account</div>
-            <ul className='space-y-1'>
-              <SheetClose asChild>
-                <NavLink
-                  to={`/listings/${user.id}`}
-                  className={`${
-                    pathname === `/listings/${user.id}`
-                      ? activeLink
-                      : 'hover:bg-primary hover:bg-opacity-5'
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
-                  <List size={20} />
-                  <span className='font-geist500 text-[15px]'>Listings</span>
-                </NavLink>
-              </SheetClose>
-              <SheetClose asChild>
-                <NavLink
-                  to='/create'
-                  className={`${
-                    pathname === '/create'
-                      ? activeLink
-                      : 'hover:bg-primary hover:bg-opacity-5'
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
-                  <HousePlus size={20} />
-                  <span className='font-geist500 text-[15px]'>Create</span>
-                </NavLink>
-              </SheetClose>
-              {isAuthenticated && (
-                <SheetClose asChild>
-                  <NavLink
-                    to='/profile'
-                    className={`${
-                      pathname === '/profile'
-                        ? activeLink
-                        : 'hover:bg-primary hover:bg-opacity-5'
-                    } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
-                    <UserRoundPen size={20} />
-                    <span className='font-geist500 text-[15px]'>Profile</span>
-                  </NavLink>
-                </SheetClose>
-              )}
-              <div className='pt-6 space-y-3'>
-                {user.id &&
-                  user.label !== 'agent' &&
-                  user.label !== 'admin' && (
+            {isAuthenticated && (
+              <>
+                <div className='pb-1 font-geist600 px-4 text-sm pt-8'>
+                  Account
+                </div>
+                <ul className='space-y-1'>
+                  <SheetClose asChild>
+                    <NavLink
+                      to={`/listings/${user.id || undefined}`}
+                      className={`${
+                        pathname === `/listings/${user.id}`
+                          ? activeLink
+                          : 'hover:bg-primary hover:bg-opacity-5'
+                      } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                      <List size={20} />
+                      <span className='font-geist500 text-[15px]'>
+                        Listings
+                      </span>
+                    </NavLink>
+                  </SheetClose>
+                  <SheetClose asChild>
+                    <NavLink
+                      to='/create'
+                      className={`${
+                        pathname === '/create'
+                          ? activeLink
+                          : 'hover:bg-primary hover:bg-opacity-5'
+                      } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                      <HousePlus size={20} />
+                      <span className='font-geist500 text-[15px]'>Create</span>
+                    </NavLink>
+                  </SheetClose>
+                  {isAuthenticated && (
                     <SheetClose asChild>
-                      <Link to='/apply'>
-                        <Button className='w-full bg-primary text-white'>
-                          Become an Agent
-                        </Button>
-                      </Link>
+                      <NavLink
+                        to='/profile'
+                        className={`${
+                          pathname === '/profile'
+                            ? activeLink
+                            : 'hover:bg-primary hover:bg-opacity-5'
+                        } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                        <UserRoundPen size={20} />
+                        <span className='font-geist500 text-[15px]'>
+                          Profile
+                        </span>
+                      </NavLink>
                     </SheetClose>
                   )}
-                {isAuthenticated ? (
-                  <SheetClose asChild>
-                    <Button
-                      onClick={() => logout()}
-                      className='w-full bg-red-100 text-destructive hover:bg-red-300'>
-                      Log out
-                    </Button>
-                  </SheetClose>
-                ) : (
-                  <SheetClose asChild>
-                    <Button
-                      onClick={() => navigate('/login')}
-                      className='w-full bg-primary'>
-                      Log in
-                    </Button>
-                  </SheetClose>
-                )}
-              </div>
-            </ul>
+                  <div className='pt-6 space-y-3'>
+                    {user.id &&
+                      user.label !== 'agent' &&
+                      user.label !== 'admin' && (
+                        <SheetClose asChild>
+                          <Link to='/apply'>
+                            <Button className='w-full bg-primary text-white'>
+                              Become an Agent
+                            </Button>
+                          </Link>
+                        </SheetClose>
+                      )}
+                    {isAuthenticated ? (
+                      <SheetClose asChild>
+                        <Button
+                          onClick={() => logout()}
+                          className='w-full bg-red-100 text-destructive hover:bg-red-300'>
+                          Log out
+                        </Button>
+                      </SheetClose>
+                    ) : (
+                      <SheetClose asChild>
+                        <Button
+                          onClick={() => navigate('/login')}
+                          className='w-full bg-primary'>
+                          Log in
+                        </Button>
+                      </SheetClose>
+                    )}
+                  </div>
+                </ul>
+              </>
+            )}
           </SheetContent>
         </Sheet>
 

@@ -21,7 +21,7 @@ export default function ToggleDisplayLength({
         {displayedItems?.map((item, index) => (
           <div
             key={index}
-            className="flex items-center gap-x-2 bg-accent py-3 pl-2 pr-12">
+            className="flex items-center gap-x-2 bg-accent py-3 pl-2 pr-12 capitalize">
             <Sparkle size={20} className="text-xs fill-primary text-primary" />
             <span className="text-sm">{item}</span>
           </div>
@@ -30,7 +30,7 @@ export default function ToggleDisplayLength({
       {items.length > maxItems && (
         <div
           onClick={toggleShowAll}
-          className="w-fit mt-3 self-center py-1 px-2 rounded-lg flex items-center gap-x-0.5 cursor-pointer text-xs">
+          className="w-fit mt-3 self-center py-1 px-2 rounded-lg flex items-center gap-x-0.5 cursor-pointer text-sm font-geist600">
           {showAll ? "Show Less" : "Show More"}
           <ChevronDown size={15} />
         </div>
