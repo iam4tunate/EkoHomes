@@ -156,7 +156,7 @@ export default function HomeDetails() {
                 <div className='flex items-center gap-x-4'>
                   <div className=''>
                     <p className='text-sm capitalize'>Hi, {user.first_name}</p>
-                    <p className='text-sm pb-2.5 pt-1.5'>
+                    <p className='text-sm pb-2.5 pt-0.5'>
                       This home listing was uploaded by you.
                     </p>
                     <div className='flex items-center text-sm font-geist500 gap-x-5'>
