@@ -13,8 +13,10 @@ import StartJourney from '@/components/shared/StartJourney';
 import { faqs, testimonies } from '@/lib/constants';
 import { useGetFeaturedHomes } from '@/lib/react-query/queries';
 import { Models } from 'appwrite';
+import { useUserContext } from '@/context/AuthContext';
 
 export default function Home() {
+  const { user } = useUserContext();
   const { data: homes, isPending: isHomesLoading } = useGetFeaturedHomes();
 
   function shortenText(text: string) {
@@ -42,11 +44,13 @@ export default function Home() {
                   Explore Homes
                 </Button>
               </Link>
-              <Link to='/apply' className='sm:hidden'>
-                <Button size='lg' variant='outline' className='w-full'>
-                  Become An Agent
-                </Button>
-              </Link>
+              {user.id && user.label !== 'agent' && (
+                <Link to='/apply' className='sm:hidden'>
+                  <Button size='lg' variant='outline' className='w-full'>
+                    Become An Agent
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </div>

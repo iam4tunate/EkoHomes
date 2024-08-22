@@ -164,17 +164,15 @@ export default function Navbar() {
                     </SheetClose>
                   )}
                   <div className='pt-6 space-y-3'>
-                    {user.id &&
-                      user.label !== 'agent' &&
-                      user.label !== 'admin' && (
-                        <SheetClose asChild>
-                          <Link to='/apply'>
-                            <Button className='w-full bg-primary text-white'>
-                              Become an Agent
-                            </Button>
-                          </Link>
-                        </SheetClose>
-                      )}
+                    {user.id && user.label !== 'agent' && (
+                      <SheetClose asChild>
+                        <Link to='/apply'>
+                          <Button className='w-full bg-primary text-white'>
+                            Become an Agent
+                          </Button>
+                        </Link>
+                      </SheetClose>
+                    )}
                     {isAuthenticated ? (
                       <SheetClose asChild>
                         <Button
