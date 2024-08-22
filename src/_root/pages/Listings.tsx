@@ -62,7 +62,7 @@ export default function Listings() {
         </div>
         {isAgent && (
           <Link to='/create'>
-            <Button className='flex items-center gap-x-1'>
+            <Button variant="secondary" className='flex items-center gap-x-1'>
               <HousePlus className='h-5 w-5' />
               Create Home Listing
             </Button>

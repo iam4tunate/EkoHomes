@@ -316,7 +316,7 @@ export default function HomeForm({ home, action }: PostFormProps) {
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder='maximum of 500 characters'
+                      placeholder='130 - 250 characters'
                       className='resize-none h-32'
                       {...field}
                     />
