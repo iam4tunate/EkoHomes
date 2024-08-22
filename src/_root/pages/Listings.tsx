@@ -19,7 +19,7 @@ export default function Listings() {
   const { data: agent, isPending: isLoadingAgent } = useGetUserById(id || '');
   const isAgent = id === user.id;
 
-  if (!user.id || user.label === 'client') {
+  if (!user.id || user.label === 'client' && user.id === id) {
     return (
       <div className='max-w-screen-md mx-auto padY padX '>
         {!user.id && (

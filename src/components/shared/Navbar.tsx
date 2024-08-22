@@ -65,7 +65,7 @@ export default function Navbar() {
               <Logo />
             </div>
             <div className='pb-1 font-geist600 px-4 text-sm'>Navigation</div>
-            <ul className='space-y-2'>
+            <ul className='space-y-1'>
               <SheetClose asChild>
                 <NavLink
                   to='/'
@@ -120,7 +120,7 @@ export default function Navbar() {
                 <div className='pb-1 font-geist600 px-4 text-sm pt-8'>
                   Account
                 </div>
-                <ul className='space-y-2'>
+                <ul className='space-y-1'>
                   <SheetClose asChild>
                     <NavLink
                       to={`/listings/${user.id || undefined}`}

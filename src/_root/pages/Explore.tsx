@@ -35,7 +35,7 @@ export default function Explore() {
         <div className='container padX'>
           <form
             onSubmit={(e) => e.preventDefault()}
-            className='-translate-y-8 -mb-8 padX'>
+            className='-translate-y-8 -mb-8 sm:padX'>
             <div className='relative flex items-center bg-accent px-4 pt-4 w-[70%] max-lg:w-full mx-auto rounded-t-lg h-12'>
               <Input
                 value={searchValue}
