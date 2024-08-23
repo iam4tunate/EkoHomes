@@ -60,7 +60,7 @@ export default function Navbar() {
           </SheetTrigger>
           <SheetContent
             side='left'
-            className='w-[300px] md:w-[350px] max-[310px]:w-full px-3 overflow-scroll'>
+            className='w-[300px] md:w-[350px] max-[310px]:w-full px-3 overflow-y-auto'>
             <div className='pb-8 px-4'>
               <Logo />
             </div>

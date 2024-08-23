@@ -41,9 +41,6 @@ export default function Footer() {
               <Link to='/explore' className='underline w-fit'>
                 Explore
               </Link>
-              <Link to='/contact' className='underline w-fit'>
-                Contact
-              </Link>
             </ul>
           </div>
           <div className=''>
