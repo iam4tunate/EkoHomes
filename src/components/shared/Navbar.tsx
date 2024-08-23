@@ -123,7 +123,7 @@ export default function Navbar() {
                 <ul className='space-y-1'>
                   <SheetClose asChild>
                     <NavLink
-                      to={`/listings/${user.id || undefined}`}
+                      to={`/listings/${user.id}`}
                       className={`${
                         pathname === `/listings/${user.id}`
                           ? activeLink
@@ -147,53 +147,49 @@ export default function Navbar() {
                       <span className='font-geist500 text-[15px]'>Create</span>
                     </NavLink>
                   </SheetClose>
-                  {isAuthenticated && (
+                  <SheetClose asChild>
+                    <NavLink
+                      to='/profile'
+                      className={`${
+                        pathname === '/profile'
+                          ? activeLink
+                          : 'hover:bg-primary hover:bg-opacity-5'
+                      } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                      <UserRoundPen size={20} />
+                      <span className='font-geist500 text-[15px]'>Profile</span>
+                    </NavLink>
+                  </SheetClose>
+                  {user.id && user.label !== 'agent' && (
                     <SheetClose asChild>
-                      <NavLink
-                        to='/profile'
-                        className={`${
-                          pathname === '/profile'
-                            ? activeLink
-                            : 'hover:bg-primary hover:bg-opacity-5'
-                        } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
-                        <UserRoundPen size={20} />
-                        <span className='font-geist500 text-[15px]'>
-                          Profile
-                        </span>
-                      </NavLink>
+                      <Link to='/apply'>
+                        <Button className='w-full bg-primary text-white'>
+                          Become an Agent
+                        </Button>
+                      </Link>
                     </SheetClose>
                   )}
-                  <div className='pt-6 space-y-3'>
-                    {user.id && user.label !== 'agent' && (
-                      <SheetClose asChild>
-                        <Link to='/apply'>
-                          <Button className='w-full bg-primary text-white'>
-                            Become an Agent
-                          </Button>
-                        </Link>
-                      </SheetClose>
-                    )}
-                    {isAuthenticated ? (
-                      <SheetClose asChild>
-                        <Button
-                          onClick={() => logout()}
-                          className='w-full bg-red-100 text-destructive hover:bg-red-300'>
-                          Log out
-                        </Button>
-                      </SheetClose>
-                    ) : (
-                      <SheetClose asChild>
-                        <Button
-                          onClick={() => navigate('/login')}
-                          className='w-full bg-primary'>
-                          Log in
-                        </Button>
-                      </SheetClose>
-                    )}
-                  </div>
                 </ul>
               </>
             )}
+            <div className='pt-6'>
+              {isAuthenticated ? (
+                <SheetClose asChild>
+                  <Button
+                    onClick={() => logout()}
+                    className='w-full bg-red-100 text-destructive hover:bg-red-300'>
+                    Log out
+                  </Button>
+                </SheetClose>
+              ) : (
+                <SheetClose asChild>
+                  <Button
+                    onClick={() => navigate('/login')}
+                    className='w-full bg-primary'>
+                    Log in
+                  </Button>
+                </SheetClose>
+              )}
+            </div>
           </SheetContent>
         </Sheet>
 

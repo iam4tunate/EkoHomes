@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { MapPin, Search, Wallet } from 'lucide-react';
+import { CircleX, MapPin, Search, Wallet } from 'lucide-react';
 import { HomeCard, Loader } from '@/components/shared';
 import { useFilterHomes } from '@/lib/react-query/queries';
 import { Models } from 'appwrite';
@@ -40,8 +40,8 @@ export default function Explore() {
               <Input
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className='w-full py-6 pr-[13rem] max-sm:pr-[8rem] max-lg:pr-[11rem] h-12'
-                placeholder='Please enter the name of the home'
+                className='w-full py-6 pr-[11rem] max-sm:pr-[6rem] h-12 max-sm:placeholder:text-sm placeholder:font-geist500 max-sm:text-sm'
+                placeholder='Enter home name to search'
               />
               <div className='absolute right-4 flex items-center'>
                 {searchValue && (
@@ -51,7 +51,7 @@ export default function Explore() {
                       setSearchValue('');
                     }}
                     className='pr-3 text-sm font-geist500 text-destructive cursor-pointer'>
-                    clear
+                    <CircleX size={20}/>
                   </p>
                 )}
                 <Button

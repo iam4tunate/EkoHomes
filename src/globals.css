@@ -119,11 +119,6 @@
   }
 
   /* GALLERY THUMBS */
-  .galleryThumb1 {
-    height: 30rem;
-    width: 100%;
-  }
-
   .galleryThumb2 {
     height: 20%;
     box-sizing: border-box;

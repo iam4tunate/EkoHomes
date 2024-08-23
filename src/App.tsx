@@ -17,6 +17,7 @@ import PrivateRoutes from './lib/PrivateRoutes';
 import Listings from './_root/pages/Listings';
 import Apply from './_root/pages/Apply';
 import Profile from './_root/pages/Profile';
+import NotFound from './components/shared/NotFound';
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
             {/* public routes  */}
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='*' element={<NotFound />} />
             <Route path='/' element={<Home />} />
             <Route path='/home/:id' element={<HomeDetails />} />
             <Route path='/about' element={<About />} />
