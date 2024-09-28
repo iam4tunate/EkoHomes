@@ -44,6 +44,26 @@ export default function HomeDetails() {
 
   if (homeDeleted) navigate(`/listings/${user.id}`);
 
+  if (!isLoadingHome && !home)
+    return (
+      <div className='container padX padY flex flex-col items-center justify-center'>
+        <div className='text-center flex flex-col gap-y-2.5 justify-center items-center mb-8 max-w-xl'>
+          <div className='font-geist500 text-3xl max-md:text-2xl capitalize'>
+            Oops! We couldn't find that property.
+          </div>
+          <p className='text-base leading-[1.3] text-center'>
+            The property you’re looking for doesn’t exist or may have been
+            removed.
+          </p>
+          <Button
+            onClick={() => navigate('/explore')}
+            className='rounded-full w-[10rem]'>
+            Explore Homes
+          </Button>
+        </div>
+      </div>
+    );
+
   return (
     <div className='container padY padX'>
       {isLoadingHome ? (
