@@ -1,6 +1,7 @@
 import { getCurrentUser } from '@/lib/appwrite/api';
 import { IUser } from '@/types';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { HashLoader } from 'react-spinners';
 
 const INITIAL_USER = {
   id: '',
@@ -71,6 +72,14 @@ export default function AuthProvider({
   useEffect(() => {
     checkAuthUser();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className='flex items-center justify-center h-screen w-full'>
+        <HashLoader color='#04563B' size={65} />
+      </div>
+    );
+  }
 
   const value = {
     user,

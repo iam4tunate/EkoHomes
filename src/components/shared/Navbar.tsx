@@ -20,7 +20,6 @@ import {
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import Loader from './Loader';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -54,13 +53,21 @@ export default function Navbar() {
       <div className='flex items-center gap-x-2'>
         <Sheet>
           <SheetTrigger asChild>
-            <div className='cursor-pointer'>
+            <div className='cursor-pointer flex items-center gap-1'>
               <MenuIcon className='w-7 h-7' />
+              <div className='flex items-center gap-x-2 rounded-full px-0.5 py-0.5 border hover:shadow cursor-pointer'>
+                <img
+                  src={user.imageUrl || '/images/user-placeholder.png'}
+                  alt=''
+                  className='rounded-full w-10 h-10'
+                />
+              </div>
             </div>
           </SheetTrigger>
           <SheetContent
             side='left'
-            className='w-[300px] md:w-[350px] max-[310px]:w-full px-3 overflow-y-auto'>
+            className='w-[300px] md:w-[350px] max-[310px]:w-full px-3 overflow-y-auto'
+          >
             <div className='pb-8 px-4'>
               <Logo />
             </div>
@@ -73,7 +80,8 @@ export default function Navbar() {
                     pathname === '/'
                       ? activeLink
                       : 'hover:bg-primary hover:bg-opacity-5'
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}
+                >
                   <Home size={20} />
                   <span className='font-geist500 text-[15px]'>Home</span>
                 </NavLink>
@@ -85,7 +93,8 @@ export default function Navbar() {
                     pathname === '/about'
                       ? activeLink
                       : 'hover:bg-primary hover:bg-opacity-5'
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}
+                >
                   <UserRoundCheck size={20} />
                   <span className='font-geist500 text-[15px]'>About us</span>
                 </NavLink>
@@ -97,7 +106,8 @@ export default function Navbar() {
                     pathname === '/services'
                       ? activeLink
                       : 'hover:bg-primary hover:bg-opacity-5'
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}
+                >
                   <BriefcaseBusiness size={20} />
                   <span className='font-geist500 text-[15px]'>Services</span>
                 </NavLink>
@@ -109,7 +119,8 @@ export default function Navbar() {
                     pathname === '/explore'
                       ? activeLink
                       : 'hover:bg-primary hover:bg-opacity-5'
-                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                  } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}
+                >
                   <Telescope size={20} />
                   <span className='font-geist500 text-[15px]'>Explore</span>
                 </NavLink>
@@ -128,7 +139,8 @@ export default function Navbar() {
                         pathname === `/listings/${user.id}`
                           ? activeLink
                           : 'hover:bg-primary hover:bg-opacity-5'
-                      } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                      } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}
+                    >
                       <List size={20} />
                       <span className='font-geist500 text-[15px]'>
                         Listings
@@ -142,7 +154,8 @@ export default function Navbar() {
                         pathname === '/create'
                           ? activeLink
                           : 'hover:bg-primary hover:bg-opacity-5'
-                      } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                      } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}
+                    >
                       <HousePlus size={20} />
                       <span className='font-geist500 text-[15px]'>Create</span>
                     </NavLink>
@@ -154,7 +167,8 @@ export default function Navbar() {
                         pathname === '/profile'
                           ? activeLink
                           : 'hover:bg-primary hover:bg-opacity-5'
-                      } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}>
+                      } flex items-center gap-x-3 py-2.5 px-4 rounded-lg`}
+                    >
                       <UserRoundPen size={20} />
                       <span className='font-geist500 text-[15px]'>Profile</span>
                     </NavLink>
@@ -176,7 +190,8 @@ export default function Navbar() {
                 <SheetClose asChild>
                   <Button
                     onClick={() => logout()}
-                    className='w-full bg-red-100 text-destructive hover:bg-red-300'>
+                    className='w-full bg-red-100 text-destructive hover:bg-red-300'
+                  >
                     Log out
                   </Button>
                 </SheetClose>
@@ -184,7 +199,8 @@ export default function Navbar() {
                 <SheetClose asChild>
                   <Button
                     onClick={() => navigate('/login')}
-                    className='w-full bg-primary'>
+                    className='w-full bg-primary'
+                  >
                     Log in
                   </Button>
                 </SheetClose>
@@ -192,18 +208,6 @@ export default function Navbar() {
             </div>
           </SheetContent>
         </Sheet>
-
-        {isUserLoading ? (
-          <Loader color='green' size={20} />
-        ) : isAuthenticated && !isUserLoading ? (
-          <div className='flex items-center gap-x-2 rounded-full px-0.5 py-0.5 border hover:shadow cursor-pointer'>
-            <img
-              src={user.imageUrl || '/images/user-placeholder.png'}
-              alt=''
-              className='rounded-full w-10 h-10'
-            />
-          </div>
-        ) : null}
 
         {user.id && user.label !== 'agent' && user.label !== 'admin' && (
           <Link to='/apply' className='max-sm:hidden'>
@@ -215,7 +219,8 @@ export default function Navbar() {
           to='/login'
           className={`pl-3 cursor-pointer py-2 px-3 hover:bg-primary hover:bg-opacity-10 text-primary rounded-md text-[15px] font-geist500 ${
             (isAuthenticated || isUserLoading) && 'hidden'
-          }`}>
+          }`}
+        >
           Log in
         </Link>
       </div>

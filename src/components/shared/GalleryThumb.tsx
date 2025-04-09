@@ -19,10 +19,15 @@ export default function GalleryThumb({ urls }: { urls: string[] }) {
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
         modules={[FreeMode, Navigation, Thumbs, Pagination]}
-        className='mySwiper2 galleryThumb1 h-[30rem] max-md:h-[25rem] w-full'>
+        className='mySwiper2 galleryThumb1 h-[30rem] max-md:h-[25rem] w-full'
+      >
         {urls.map((url, index) => (
           <SwiperSlide key={index}>
-            <img src={url} alt={`Home ${index}`} className='object-cover rounded-xl' />
+            <img
+              src={url}
+              alt={`Home ${index}`}
+              className='object-cover rounded-xl'
+            />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -40,10 +45,15 @@ export default function GalleryThumb({ urls }: { urls: string[] }) {
             slidesPerView: 4.5,
           },
         }}
-        className='mySwiper galleryThumb2'>
+        className='mySwiper galleryThumb2'
+      >
         {urls.map((url, index) => (
           <SwiperSlide key={index}>
-            <img src={url} alt={`Home ${index}`} className='object-cover h-[5rem]' />
+            <img
+              src={url}
+              alt={`Home ${index}`}
+              className='object-cover h-[5rem]'
+            />
           </SwiperSlide>
         ))}
       </Swiper>
